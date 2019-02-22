@@ -1,0 +1,459 @@
+%%%
+ %
+ % Copyright (C) 2019 Ángel Iván Gladín García
+ %
+ % This program is free software: you can redistribute it and/or modify
+ % it under the terms of the GNU General Public License as published by
+ % the Free Software Foundation, either version 3 of the License, or
+ % (at your option) any later version.
+ %
+ % This program is distributed in the hope that it will be useful,
+ % but WITHOUT ANY WARRANTY; without even the implied warranty of
+ % MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ % GNU General Public License for more details.
+ %
+ % You should have received a copy of the GNU General Public License
+ % along with this program.  If not, see <http://www.gnu.org/licenses/>.
+%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[11pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[margin=1in]{geometry}
+ 
+\usepackage{listings}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{enumerate}
+\usepackage{enumitem}
+
+\usepackage{longtable}
+\usepackage{hyperref}
+\usepackage{commath}
+
+\usepackage{bbm}
+\usepackage{dsfont}
+\usepackage{mathrsfs}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{mathtools}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\theoremstyle{definition}\newtheorem{p}{Ejercicio}
+\theoremstyle{definition}\newtheorem{pp}[p]{$(*)$Ejercicio}
+\numberwithin{p}{section}
+
+\renewcommand{\theenumi}{\alph{enumi}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Oh}{\mathcal{O}} %% Notacion "O"
+\newcommand{\ent}{\Longrightarrow}
+\newcommand{\lra}{\longrightarrow}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\sii}{\Longleftrightarrow}
+\newcommand{\clase}[1]{\overline{#1}}  %% barrita sobre letras
+\newcommand{\ord}{\text{ord}}
+\newcommand{\leg}[2]{\left( \frac{#1}{#2}\right)} %% Simbolo de Legendre
+\newcommand{\sol}{\textbf{\underline{Solución}: }} %% Solución
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{
+    \vspace{-1.5cm}
+        Universidad Nacional Autónoma de México\\
+        Facultad de Ciencias\\
+        Teoría de los Números I\\
+    \vspace{.5cm}
+    \large
+        \textbf{Tarea 1}\\        
+}
+\author{
+    Ángel Iván Gladín García\\
+    No. cuenta: 313112470\\
+    \texttt{angelgladin@ciencias.unam.mx}
+}
+\date{25 de Febrero 2019}
+\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newtheorem{theorem}{Teorema}
+\newtheorem{example}{Ejemplo}
+\newtheorem{corollary}{Corolario}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definición}
+\newtheorem{prop}{Proposición}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Divisibilidad}
+
+%%%%%
+\begin{p} %% Ejercicio 1.1
+  Definimos la siguiente relaci\'on:
+  \[
+    a\preccurlyeq b\quad\stackrel{\text{def}}{\sii}\quad a\mid b.
+  \]
+  Prueba que $\preccurlyeq$ es un orden parcial sobre $\Z^+=\{1,2,\ldots\}$, es decir que $(\Z^+,\preccurlyeq)$.
+  Explica porqu\'e no es un orden parcial sobre $\Z$.\\
+  
+  \sol Antes de empezar procederemos dando unas definiciones.
+  
+  \begin{definition}
+  Un \textbf{orden parcial} es una relación binaria $R$ sobre un conjunto $X$ que es reflexiva, 
+  antisimétrica, y transitiva, es decir, para cualesquiera $a$, $b$, y $c$ en $X$ se tiene que:
+  \begin{enumerate}
+      \item $aRa$ (reflexividad).
+      \item Si $aRb$ y $bRa$, entonces $a=b$ (antisimetría).
+      \item Si $aRb$ y $bRc$, entonces $aRc$ (transitividad).
+  \end{enumerate}
+  \end{definition} 
+  
+  \begin{definition}
+  Sean $a, b \in \Z$, decimos que $a$ \textbf{divide} a $b$ si existe un entero $k \in \Z$ tal 
+  que $b=ak$.
+  \[
+    a \mid b \quad\stackrel{\text{def}}{\sii} \quad  \exists k \in \Z \backepsilon b=ak
+  \]
+  \end{definition}
+  
+  Por demostrar que  $(\Z^+,\preccurlyeq)$. Para esto hay que probar las tres propiedades descritas
+  anteriormente.
+  \begin{itemize}
+      \item \underline{Reflexividad}. Sea $a \in \Z$, por demostrar que $a \preccurlyeq a$.
+      Por definición se tiene que $\exists k \in \Z \backepsilon a=ak$ y $k$ debe ser una unidad en 
+      $\Z$ por lo que $a1=a$. Por tanto $a \preccurlyeq a$.
+      
+      \item \underline{Antisimetría}. Sean $a, b \in \Z$. Si $a \preccurlyeq b$ y $b \preccurlyeq a$ 
+      por demostrar que $a=b$.
+      Por definición de $\preccurlyeq$ tenemos que $\exists p \in \Z \backepsilon b=ap$ y 
+      $\exists q \in \Z \backepsilon a=bq$ entonces sustituyendo $a$ tenemos que $b=(bq)p$, asociando 
+      $b=b(qp)$, entonces $qp=1$. Por tanto $a=b$.
+
+    \item \underline{Transitividad}. Sean $a, b, c \in \Z$. Si $a \preccurlyeq b$ y $b \preccurlyeq c$ 
+      por demostrar que $a \preccurlyeq c$.
+      Por definición de $\preccurlyeq$ tenemos que $\exists p \in \Z \backepsilon b=ap$ y 
+      $\exists q \in \Z \backepsilon c=bq$, sustituyendo $b$ tenemos que $c=(ap)q$, asociando
+      $c=a(pq)$. Por tanto $a \preccurlyeq b$.      
+  \end{itemize}
+    
+    Ahora bien $(\Z, \preccurlyeq)$ no es un orden parcial porque no cumple la antisimetría y 
+    se dará un contraejemplo.
+    Sean $a, b \in \Z$. Si $a \preccurlyeq b$ y $b \preccurlyeq a$. Por definición de $\preccurlyeq$ 
+    tenemos que $\exists p \in \Z \backepsilon b=ap$ y $\exists q \in \Z \backepsilon b=aq$ pero si 
+    tomamos a $a=1$ y $b=-1$ (s.p.d.g), no se cumple $\preccurlyeq$ porque $a \neq b$.
+\end{p}
+%%%%%
+
+%%%%%
+\begin{p} Sobre las unidades de un anillo:
+  \begin{enumerate}
+  \item Sea $A$ un anillo conmutativo con 1 y
+    $U(A)=\{u\in A\mid \exists v\in A\;\text{tal que}\; uv=1\}$ su conjunto de unidades. Definimos la
+    siguiente relaci\'on:
+    \[
+      a\sim b \quad\stackrel{\text{def}}{\sii}\quad \exists u\in U(A)\;\;\text{tal que}\;\; a=ub
+    \]
+    Prueba que $\sim$ es una relaci\'on de equivalencia. Si $a\sim b$, decimos que $a$ y $b$ son
+    \emph{asociados}. ?`Qu\'e conjunto es el espacio cociente $\Z/_{\sim}$?\\
+    \sol TODO
+    
+  \item Sea $p\in\Z$ un n\'umero primo. Prueba que $\Z_{(p)}:=\{\frac{a}{b}\in\Q\mid p\not\,\mid b\}$
+    es un anillo con las operaciones usuales de $\Q$ y describe el conjunto $U(\Z_{(p)})$.\\
+  \sol TODO
+    
+  \item Prueba que cuales quiera dos elementos primos de $\Z_{(p)}$ son asociados (un elemento
+    $q$ en cualquier anillo conmutativo con 1 es primo si no es una unidad y adem\'as cumple
+    que $q\mid ab \ent q\mid a$ \'o $q\mid b$).\\
+  \sol TODO
+  
+  \item Prueba que si $\frac{a}{b}\in\Z_{(p)}$ no es una unidad, entonces
+    $\frac{a}{b}+1\in U(\Z_{(p)})$. Explica porque la prueba de Euclides de la infinitud de los
+    n\'umeros primos falla para $\Z_{(p)}$.\\
+  \sol TODO
+  
+  \end{enumerate}
+  
+\end{p}
+%%%%%
+
+%%%%%
+%
+\begin{p} Sean $a,b,c\in\Z$. Prueba las siguientes propiedades:
+  \begin{enumerate}
+  \item $a\mid b \ent ac\mid bc$ para toda $c\in\Z$ y si $c\neq 0$, entonces $ac\mid bc \ent a\mid b$. \\
+  \sol Como por hipótesis y aplicando la definición de divisibilidad tenemos que $\exists p, q$ tales que 
+  si $ap=b$ entonces $acq=bc$. Entonces basta con dividir $acq=bc$ entres $c$ ya que es un factor común 
+  teniendo $\frac{acq}{c}=\frac{bc}{c}$, teniendo entonces $aq=b$. Por tanto $a \mid b$
+  
+  \item Si $a\mid a'$ y $b\mid b'$, entonces $a b\mid a'b'$. \\
+  \sol Basta escribir a $a \mid a'$ y $b\mid b'$, usando la definición de divisibilidad tenemos entonces 
+  $p, q \in \Z$ tal que $ap=a'$ y $bq=b'$. Multiplicando ambas igualdades tenemos que $apbq=a'b'$ y asociando 
+  $ab(pq)=a'b'$. Por tanto $a b \mid a'b'$.
+  
+  \item Si $a\mid c$, $b\mid c$ y $(a,b)=1$, entonces $ab\mid c$. Muestra un contraejemplo de esta 
+  propiedad si $(a,b)>1$. \\
+  \sol Tomando $a=2$, $b=4$ y $c=4$. Porque $(a,b) = (2, 4) = 2$ y tenemos que  $2 \mid 4$ y $4 \mid 4$, 
+  pero no se cumple $ab\mid c$ ya que $8 \nmid 4$.
+  
+  \item $(a+n,n)\mid n$ para toda $n\in\Z$.\\
+  \sol Sabemos por un teorema, que el máximo común divisor de dos números cualesquiera puede ser expresado 
+  como la mínima combinación lineal. Sabiendo éso, podemos expresar a $(a+n, n) = d$ como $p(a+n) + qn = d$ 
+  con $p, q \in \Z$.  Ahora bien, por el inciso h) sabemos que si $(a,b)=d$, entonces $(\frac{a}{d}, \frac{b}{d}) = 1$. 
+  Aplicando el resultado previo, tenemos que $(\frac{a+n}{d}, \frac{n}{d}) = 1$, reescribiendo como combinación 
+  lineal se tiene que $r\frac{a+n}{d} + s\frac{n}{d} = 1$ para algún $r, s \in \Z$, multiplicando ambos lados por $n$ 
+  se tiene $nr\frac{a+n}{d} + ns\frac{n}{d} = n$ y factorizando $n$ tenemos $n(r\frac{a+n}{d} + s\frac{n}{d}) = n$,
+  lo que implica que $(r\frac{a+n}{d} + s\frac{n}{d}) = 1$. Por tanto, aplicando la definición de divisibilidad 
+  se tiene que $(a+n,n)\mid n$.
+  
+  \item Si $(a,b)=1$ entonces $(a+b,a-b)=1$ \'o 2.\\
+  \sol Si $(a,b)=d$ por definición se tiene que $d \mid a$ y $d \mid b$. Entonces regresando  a la expresión a 
+  probar se tiene que $d \mid a+b, a-b$, si tomamos la suma y diferencia de ambos términos tenemos que 
+  $d \mid (a+b)+(a-b)=2a$ y $d \mid (a+b)(a-b)=2b$, teniedo entonces que $d \mid (2a,2b)=2(a,b)=2$. 
+  Ergo $d=1$ o $d=2$.
+  
+  \item $(a+tb,b)=(a,b)$ para toda $t\in\Z$.\\
+  \sol Sabemos que podemos expresar a $(a,b)=d$ como la menor combinación lineal positiva. Entonces 
+  expresamos a  $(a+tb,b)=d$ como dicha combinación teniendo entonces $(a+tb)m + bn = d$ con $m,n \in \Z$, 
+  expandiendo el producto y asociando tenemos $am + (tm+n)b = d$ y por otro lado tenemos que 
+  $ap' + bq' = d$. Por tanto, podemos expresar a ambos $(a+tb,b)$ y $(a,b)$ como la menor combinación lineal 
+  positiva y ambos tienen el mismo máximo común divisor. Ergo $(a+tb,b)=(a,b)$ para toda $t \in\Z$.
+  
+  \item Si $a'\mid a$, $b'\mid b$ y $(a,b)=1$ entonces $(a',b')=1$. En palabras esto es: si $a$ y $b$ son 
+  primos relativos, entonces sus divisores son primos relativos entre ellos.\\
+  \sol TODO
+
+  \item Si $(a,b)=d$ entonces $\left( \frac{a}{d}, \frac{b}{d} \right)=1$. \\
+  \sol Sea $\left( \frac{a}{d}, \frac{b}{d} \right)=d'$. Por demostrar que $d'=1$. Como $d'$ es un factor 
+  común de $\frac{a}{d}$ y de $\frac{b}{d}$, entonces $\exists l, m$ tales que $\frac{a}{d} = ld'$ y 
+  $\frac{b}{d} = md'$. Entonces $a = ldd'$ y $b = m dd'$, entonces $dd'$ es un factor común de $a$ y $b$. 
+  Entonces, por definición de máximo común divisor tenemos que $dd' \leq d$, entonces $d' = 1$. 
+  Por tanto $d'$ es un entero positivo tal que $d'=1$. Ergo si  $(a, b) = d$ entonces  
+  $\left( \frac{a}{d}, \frac{b}{d} \right)=1$.
+  
+  \item Si $(a,b)=1=(a,c)$, entonces $(a,bc)=1$.\\
+  \sol TODO
+  
+  \item  Sea $a_0,a_1,a_2,\ldots$ la sucesi\'on de Fermat 1,1,2,3,5.$\ldots$ definida recursivamente como 
+  $a_{n+1}:=a_n+a_{n-1}$ donde $a_0=1=a_1$. Prueba que $(a_n,a_{n+1})=1$ para toda $n$.\\
+  \sol TODO
+  
+  \end{enumerate}
+\end{p}
+%
+%%%%%
+
+
+\begin{p}
+  Un \emph{m\'inimo com\'un m\'ultiplo} de dos enteros $a,b\in\Z$ se define como un entero $m> 0$
+  que cumple las siguientes dos propiedades:
+  \begin{enumerate}
+  \item[$(\bullet)$] $a\mid m$ y $b\mid m$.
+  \item[$(\bullet\bullet)$] Si $m'\in\Z$ es tal que $a\mid m'$ y $b\mid m'$, entonces $m\mid m'$.
+  \end{enumerate}
+  Fija $a,b,c\in\Z$. Prueba las siguientes propiedades del m\'inimo com\'un m\'ultiplo (mcm):
+  \begin{enumerate}
+  \item Prueba que el mcm de $a,b$ es \'unico; gracias a esto lo denotamos por $[a,b]$.\\
+  \sol Prueba por unicidad y existencia.\\
+  Empecemos por suponer $n,m \in \Z$ que satisfacen $(\bullet)$ y 
+  $(\bullet \bullet)$. Como $m$ es un m.c.d. de $a$ y $b$ y como $n$ satisface $(\bullet \bullet)$ 
+  entonces $n \mid m$. Sin perdida de generalidad, intercambiamos las variables y tenemos que
+  $m \mid n$. Lo que implica que si $n \mid m$ y $m \mid n$, entonces $n=m$ y con esto 
+  hemos provado la unicidad.\\
+  Para provar la existencia, denotaremos a $S = {x \in \N : a \mid x \land b \mid x}$. Por el 
+  principio del buen orden se tiene que $S$ tiene un elemento mínimo $m$. Por tanto tenemos que 
+  $a \mid m$ y $b \mid m$, con ésto hemos provado $(\bullet)$. Para probar $(\bullet \bullet)$ 
+  denotaremos a $x \in \Z$ tal que $a \mid x \land b \mid x$. Por el algorítmo de la división 
+  tenemos que $\exists! q, r \in \Z$ tal que $x = mq+r, \quad 0 < r \leq m$. Dado que $a \mid x$
+  y $a \mid x$ entonces $x = aq_1$ para algún $q_1 \in \Z$. Como $a \mid m$ entonces por definición 
+  $m = aq_2$ para alguna $q_2 \in \Z$. Se sigue que $aq_1 = aq_2+r$ y reescribiendo $a(q_1 - q_2)= r$. 
+  Lo que implica que $a \mid r$ (por definición). Si $r>0$ entonces $r \in S$ y contradice la 
+  definición de $m$. Ergo $r = 0$. Para $b$ la prueba es totalmente análoga.
+  
+  \item $[ab,ac]=a[b,c]$\\
+  \sol TODO
+  
+  \item $(a,b)=[a,b]\ ent a=b$\\
+  \sol Tenemos por el inciso $d)$ que $[a,b]=\frac{ab}{(a,b)}$. Sabiendo eso, rescribiremos al m.c.m. como 
+  $[a,b] = \frac{ab}{(a,b)}$ pero por hipótesis se tiene que $(a,b)=[a,b]$, sustituyendo $[a,b]$ se tiene que 
+  $(a,b) = \frac{ab}{(a,b)}$, despejando se sigue que $(a,b)^2 = ab \iff a=b$ porque $ab$ tiene que 
+  ser cuadrado.
+  
+  \item $ab=(a,b)[a,b]$\\
+  \sol Antes de probarlo, enunciaremos los siguiente Lemas. Sean $a$ y $b$ dos enteros positivos  
+  expresaremos al m.c.m y m.c.d. con la siguiente descomposición canónica.
+  $$a=p_{1}^{a_1}p_{2}^{a_2} \cdots p_{n}^{a_n} \quad \land  \quad b=p_{1}^{b_1}p_{2}^{b_2} \cdots p_{n}^{b_n} \backepsilon a_i,b_i \geq 0$$
+  (Asumimos que ambas descomposiciones contienen exactamente las mismas bases primas $p_i$). 
+  Entonces podemos expresar al m.c.m y m.c.d como .
+  $$[a,b] =p_{1}^{max(a_1,b_1)}p_{2}^{max(a_2,b_2)} \cdots p_{n}^{max(a_n,b_n)}$$
+  $$(a,b) =p_{1}^{min(a_1,b_1)}p_{2}^{min(a_2,b_2)} \cdots p_{n}^{min(a_n,b_n)}$$
+  Ahora bien, teniendo los lema anteriores procederemos con la demostración.\\
+  Tenemos que $ab=(a,b)[a,b]$, reacomodando tenemos demostrar que $[a,b]=\frac{ab}{(a,b)}$.
+  Sea $a=p_{1}^{a_1}p_{2}^{a_2} \cdots p_{n}^{a_n}$ y $b=p_{1}^{b_1}p_{2}^{b_2} \cdots p_{n}^{bn}$ 
+  la descomposición canónica de $a$ y $b$. Entonces tenemos
+  $$[a,b] = p_{1}^{max(a_1,b_1)}p_{2}^{max(a_2,b_2)} \cdots p_{n}^{max(a_n,b_n)}$$
+  y
+  $$(a,b) = p_{1}^{min(a_1,b_1)}p_{2}^{min(a_2,b_2)} \cdots p_{n}^{min(a_n,b_n)}$$
+  Por consiguiente,
+  \begin{align*}
+  (a,b)[a,b]
+    &= p_{1}^{min(a_1,b_1)}p_{2}^{min(a_2,b_2)} \cdots p_{n}^{min(a_n,b_n)} \cdot p_{1}^{max(a_1,b_1)}p_{2}^{max(a_2,b_2)} \cdots p_{n}^{max(a_n,b_n)} \\
+    &= p_{1}^{min(a_1,b_1)+max(a_1,b_1)} \cdots p_{n}^{max(a_n,b_n)+max(a_n,b_n)} \\
+    &= p_{1}^{a_1 + b_1}p_{2}^{a_2 + b_2} \cdots p_{n}^{a_n + b_n} \\
+    &= (p_{1}^{a_1}p_{2}^{a_2} \cdots p_{n}^{a_n})(p_{1}^{b_1}p_{2}^{b_2} \cdots p_{n}^{b_n}) \\
+    &= ab
+  \end{align*}
+
+  Ergo $[a,b]=\frac{ab}{(a,b)}  \iff ab=(a,b)[a,b]$  
+  
+  \item $(a+b,[a,b])=(a,b)$\\
+  \sol TODO
+  
+  \end{enumerate}
+\end{p}
+%
+\begin{p}
+  Sean $a\in\Z$ y $d\in\Z^+$ fijos y considera el sistema de ecuaciones
+  \[
+    (\star)\left\{
+      \begin{matrix}
+        (x,y) = d\;\\
+        xy =a
+      \end{matrix}
+    \right.
+  \]
+  Prueba que $(\star)$ tiene una soluci\'on $(x_0,y_0)\in\Z\times\Z$ si y solamente si $d^2\mid a$.\\
+  \sol $\Longrightarrow	 )$ Por demostrar que $d^2 \mid a$. Tomando $(x_0,y_0)\in\Z\times\Z$ como una 
+  solución particular de la forma $x_0=d$ y $y_0=\frac{a}{d}$, de esta forma se satisface en la segunda ec. que:
+  $$d\frac{a}{d}=a \quad a=a$$
+  Por definición de divisivilidad $\exists k \in \Z \backepsilon d^2k=a$ y escibiendo a como $(x,y)$ como 
+  combinación lineal de la forma $xs+ yt = d$ p.a. $s,t \in \Z$ se sigue que:
+  \begin{align*}
+  a
+      &= kd^2\\
+      &= k(xs+yt)^2 && \text{(Sutituyendo $d=xs+yt$)}\\
+      &= k(ds+\frac{a}{d}t)^2 && \text{(Reescribiendo $x=d$ y $y=\frac{a}{d}$)}\\
+      &= k(d^2s^2 + 2ds\frac{a}{d}t + \frac{a^2}{d^2}t) && \text{(Expandiendo el binomio)}\\
+      &= k(d^2s^2 + 2ds\frac{xy}{d}t + \frac{a^2}{d^2}t^2) && \text{(Reescribiendo $a=xy$)}\\
+      &= k(d^2s^2 + 2ds\frac{dy}{d}t + \frac{a^2}{d^2}t^2) && \text{(Reescribiendo $x=y$)}\\
+      &= k(d^2s^2 + d^2\frac{2syt}{d} + \frac{a^2}{d^2}t^2) && \text{(Asociando y conmutando)}\\
+      &= k(d^2s^2 + d^2\frac{2syt}{d} + \frac{x^2y^2}{d^2}t^2) && \text{(Reescribiendo $a=xy$)}\\
+      &= k(d^2s^2 + d^2\frac{2syt}{d} + d^2\frac{y^2t^2}{d^2}) && \text{(Reescribiendo $x=d$ y asociando)}\\
+      &= kd^2(s^2 + \frac{2syt}{d} + \frac{y^2t^2}{d^2}) && \text{(Factorizando $d^2$)}\\
+      &= m'd^2 && \text{Sea $m'=k(s^2 + \frac{2syt}{d} + \frac{y^2t^2}{d^2})$}
+  \end{align*}
+  Por definición de divisivilidad, ergo $d^2 \mid a$.\\
+  $\Longleftarrow )$ Por demostrar que $(\star)$ tiene una solución $(x_0,y_0)\in\Z\times\Z$.
+  Como $d^2 \mid a$ entonces $d^2p=a$ para alguna $p \in \Z$. Entonces tiene solucion
+  \begin{align*}
+  & \iff xy=d^2p\\
+  & \iff d^2p=a\\
+  & \iff x=d^2 \land y=\frac{a}{d^2}\\
+  & \iff p=y=\frac{a}{d^2}
+  \end{align*}
+  Por tanto, $(\star)$ tiene una solución $(x_0,y_0)\in\Z\times\Z$.
+\end{p}
+
+%
+\begin{p}
+  Sea $D_n$ el conjunto de divisores positivos de $n$, ie. $D_n=\{d>0 : d\mid n\}$. Ahora sea
+  $F:D_a\times D_b\ra D_{ab}$ la funci\'on definida por $F(d,d')=dd'$. Prueba que si $(a,b)=1$, entonces $F$ es
+  una funci\'on bien definida y que es biyectiva. Si $(a,b)>1$, ?`deja de ser biyectiva la funci\'on? Explica tu
+  respuesta.\\
+  \sol TODO
+\end{p}
+%
+\begin{p}
+  Sean $n,m,x,y\in\Z$ fijos tales que $n=ax+by$ y $m=cx+dy$ para algunas $a,b,c,d\in\Z$. Si $ad-bc=\pm 1$, prueba
+  que $(m,n)=(x,y)$.\\
+  \sol Sea $d=(m,n)$, entonces podemos expresar a $d$ como $d=sn+tm$ p.a. $s,t \in \Z$, sea 
+  $d'=(x,y)$. Como por hipótesis  dejamos fijos $n=ax+by$ y $m=cx+dy$, entonces 
+  $d=s(ax+by)+t(cx+dy)=sax+sby+tcx+tdy=x(sa+tc)+y(sb+td)$. Por tanto se sigue que $d \mid d'$ 
+  porque tanto $d$ y $d'$ se pueden expresar como combinaciones lineales en términos de $x$ y $y$.
+  Una transformación lineal por $\begin{bsmallmatrix}a&b\\c&d\end{bsmallmatrix}$
+  es invertible si $\Delta \neq 0$, pero como por hipótesis se tiene que $ad-bc=\pm 1$, entonces 
+  podemos escribir a $x$ y $y$ como combinaciones lineales de $m$ y $n$, entonces se sigue que 
+  $x=dm-bn$ y $y=-cm+an$. $\exists p, q \backepsilon px + qy = d'$.
+  Se tiene que:
+  \begin{align*}
+  d'
+    &= px + qy \\
+    &= p(dm-bn) + q(-cm+an) \\
+    &= m(pd-qc) + n(-qb+qa) \\
+  \end{align*}
+  Por tanto, se tiene que $d' \mid d$.\\
+  Si $(m,n) \mid (x, y)$ y $(x, y) \mid (m,n)$, (como el máximo común divisor es positivo) 
+  entonces $(m,n)=(x,y)$.
+\end{p}
+%
+
+\begin{p}
+  Fija tres enteros $a,b,c\in\Z$. Prueba que la ecuaci\'on $ax+by=c$ tiene soluci\'on si y solamente si $(a,b)\mid c$.
+  Adem\'as, si $(x_0,y_0)$ es una soluci\'on ?`de qu\'e forma son el resto de las soluciones?\\
+  \sol $\Rightarrow )$ TODO
+  
+\end{p}
+%
+\begin{p}
+  Prueba que todo entero mayor que 6 se puede expresar como suma de dos enteros primos relativos.\\
+  \sol TODO
+\end{p}
+%
+\begin{pp}
+  Demuestra que para todo $a>1$ y exponentes $n,m>0$ se cumple que $(a^n-1,a^m-1)=a^{(n,m)}-1$.\\
+  \sol TODO
+  
+\end{pp}
+%
+\begin{pp}
+  Los n\'umeros arm\'onicos no son enteros. 
+  \begin{enumerate}
+  \item Sean $\frac{a}{b},\frac{c}{d}\in\Q$ fracciones irreducibles, es decir $(a,b)=1=(c,d)$. Prueba que
+    \[
+      \frac{a}{b}+\frac{c}{d}\in\Z \quad\ent\quad b=\pm d.
+    \]
+    \sol TODO
+  \item Los n\'umero' arm\'onicos $H_n$ se definen como las sumas parciales de la serie arm\'onica, es decir
+  \[
+    H_n:=\sum_{k=1}^n\frac{1}{k}.
+  \]
+  Prueba que $H_n\not\in\Z$ para toda $n>1$.\\
+  \sol TODO
+  \end{enumerate}
+\end{pp}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{thebibliography}{}
+
+\bibitem{}
+Notas tomadas en clase del curso de Teoría de los Números I (2019-2).
+
+\bibitem{} 
+Thomas Koshy. 
+\textit{Elementary Number Theory with Applications. 2nd Edition.}
+Addison-Wesley, Reading, Massachusetts, 1993.
+Academic Press. 
+8th May 2007.
+
+\bibitem{}
+Apostol, Tom M. 
+\textit{Introduction to Analytic Number Theory.} 
+Springer-Verlag, New York, 1976.
+
+\end{thebibliography}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
