@@ -165,21 +165,39 @@
     \]
     Prueba que $\sim$ es una relaci\'on de equivalencia. Si $a\sim b$, decimos que $a$ y $b$ son
     \emph{asociados}. ?`Qu\'e conjunto es el espacio cociente $\Z/_{\sim}$?\\
-    \sol TODO
+    \sol Antes de empezar, se procederá a dar la definición de \emph{relación de equivalencia}
+    \begin{definition}
+    Sea $K$ un conjunto dado no vació y $R$ una relación binaria sobre $K$. Se dice que $R$ 
+    es una \emph{relación de equivalencia} si cumple las siguientes propiedades:
+        \begin{itemize}
+        \item \underline{Reflexividad}. $\forall x \in K : \quad xRx$
+        \item \underline{Simetría}. $\forall x,y \in K : \quad xRy \implies yRx$
+        \item \underline{Transitividad}. $\forall x,y,z \in K : \quad xRy \land yRz\implies xRz$
+        \end{itemize}
+    \end{definition}
+    Por demostrar que $a\sim b$ es una relación de equivalencia.
+    \begin{itemize}
+        \item Reflexividad: $a=1a \quad \forall a \in A$.
+        \item Simetría: Si $a \sim b$ $implies$ $a=ub$ como $\exists u^{-1} \in A$ 
+        $\implies$ $u^{-1} \in U(A)$. Por lo tanto $b=u^{-1}a$, $b \sim a$.
+        \item Transitividad: $a \sim b$ y $b \sim c$ $\implies$ $a=ub \land b=u'c$ 
+        con $u, u' \in U(A)$ $\implies$ $a=u(u'c)$ $\implies$ $a=(uu')c$. 
+        Por tanto $a \sim c$ $\implies$ $uu' \in A$.  
+    \end{itemize}
     
   \item Sea $p\in\Z$ un n\'umero primo. Prueba que $\Z_{(p)}:=\{\frac{a}{b}\in\Q\mid p\not\,\mid b\}$
     es un anillo con las operaciones usuales de $\Q$ y describe el conjunto $U(\Z_{(p)})$.\\
-  \sol \textbf{Quiero que este sea mi ejercicio gratis.}
+  \sol 
     
   \item Prueba que cuales quiera dos elementos primos de $\Z_{(p)}$ son asociados (un elemento
     $q$ en cualquier anillo conmutativo con 1 es primo si no es una unidad y adem\'as cumple
     que $q\mid ab \ent q\mid a$ \'o $q\mid b$).\\
-  \sol \textbf{Quiero que este sea mi ejercicio gratis.}
+  \sol 
   
   \item Prueba que si $\frac{a}{b}\in\Z_{(p)}$ no es una unidad, entonces
     $\frac{a}{b}+1\in U(\Z_{(p)})$. Explica porque la prueba de Euclides de la infinitud de los
     n\'umeros primos falla para $\Z_{(p)}$.\\
-  \sol \textbf{Quiero que este sea mi ejercicio gratis.}
+  \sol 
   
   \end{enumerate}
   
@@ -273,8 +291,6 @@
        &= 1 && \text{(Por hipótesis de inducción)}
    \end{align*}
    Por tanto $(a_n,a_{n+1})=1$ $\forall n$.
-   
-  
   \end{enumerate}
 \end{p}
 %
@@ -316,7 +332,7 @@
       &= \frac{abac}{abx+acy} && \text{(Mínima combinación lineal de ab, cy)}\\
       &= \frac{abac}{a(bx + cy)} && \text{(Factorizando)}\\
       &= \frac{abc}{bx+cy} && \text{(Reduciendo factor común)}\\
-      &= a \frac{bc}{(b,c)} && \text{(Reescribiendo como m.c.d a $bx+cy$)}\\
+      &= a \frac{bc}{(b,c)} && \text{(Reescribiendo como m.c.d. a $bx+cy$)}\\
       &= a [b, c] && \text{(Por inciso $d)$)}
   \end{align*}
   Ergo $[ab,ac]=a[b,c]$.
@@ -340,7 +356,6 @@
   Sea $a=p_{1}^{a_1}p_{2}^{a_2} \cdots p_{n}^{a_n}$ y $b=p_{1}^{b_1}p_{2}^{b_2} \cdots p_{n}^{bn}$ 
   la descomposición canónica de $a$ y $b$. Entonces tenemos
   $$[a,b] = p_{1}^{max(a_1,b_1)}p_{2}^{max(a_2,b_2)} \cdots p_{n}^{max(a_n,b_n)}$$
-  y
   $$(a,b) = p_{1}^{min(a_1,b_1)}p_{2}^{min(a_2,b_2)} \cdots p_{n}^{min(a_n,b_n)}$$
   Por consiguiente,
   \begin{align*}
@@ -384,7 +399,7 @@
   
   Sabiendo eso procederemos con la demostración:
   \begin{align*}
-  (a+b, [a,b]) \\
+  (a+b, [a,b])
     &= [(a+b,a), (a+b, b)] && \text{(Distributividad del m.c.d. sobre m.c.m)}\\
     &= \frac{(a,b)}{(a,b)} && \text{(Aplicando el lemma)}\\
     &= \frac{(a,b)(a,b)}{(a,b)} && \text{(Por inciso $d)$)}\\
@@ -443,7 +458,7 @@
   $F:D_a\times D_b\ra D_{ab}$ la funci\'on definida por $F(d,d')=dd'$. Prueba que si $(a,b)=1$, entonces $F$ es
   una funci\'on bien definida y que es biyectiva. Si $(a,b)>1$, ?`deja de ser biyectiva la funci\'on? Explica tu
   respuesta.\\
-  \sol TODO
+  \sol \textbf{Quiero que este sea mi ejercicio gratis.}
 \end{p}
 %
 \begin{p}
@@ -462,7 +477,7 @@
   d'
     &= px + qy \\
     &= p(dm-bn) + q(-cm+an) \\
-    &= m(pd-qc) + n(-qb+qa) \\
+    &= m(pd-qc) + n(-qb+qa)
   \end{align*}
   Por tanto, se tiene que $d' \mid d$.\\
   Si $(m,n) \mid (x, y)$ y $(x, y) \mid (m,n)$, (como el máximo común divisor es positivo) 
@@ -473,8 +488,45 @@
 \begin{p}
   Fija tres enteros $a,b,c\in\Z$. Prueba que la ecuaci\'on $ax+by=c$ tiene soluci\'on si y solamente si $(a,b)\mid c$.
   Adem\'as, si $(x_0,y_0)$ es una soluci\'on ?`de qu\'e forma son el resto de las soluciones?\\
-  \sol $\Rightarrow )$ TODO
-  
+  \sol $\Rightarrow )$ Por demostrar que $(a,b)\mid c$. Suponer que $ax+by=c$ tiene solución 
+  i.e. $x=r$ y $y=s$, entonces $ar+bs=c$. Como $(a,b)=d$, por definición se sigue que $d \mid a$ y
+  $d \mid b$. Recordando un teorema visto en clase que dice que:\\
+  Sean $a,b \in \Z$ y $d=(a,b)$ si $d \mid a$ y $d \mid b$ entonces $d \mid (ap + bq)$ para algún
+  $p,q \in \Z$.\\
+  Sabiendo eso, entonces $d \mid ar + bs = c$.\\
+  $\Leftarrow )$ Por demostrar que la ecuación $ax+by=c$ tiene solución. Expresando $(a,b)=d$, 
+  entonces $c = dr$ para algún $r \in \Z$. Escribiendo a $(a,b)=an+bm$ para algún $n,m \in \Z$,
+  se sigue que:
+  \begin{align*}
+  anr + bmr = dr && \text{(Multiplicando $an+bm$ por $r$)}\\
+  a(nr) + b(mr) = c && \text{(Asociando y sustutuyendo $dr=c$)}
+  \end{align*}
+  Por tanto la ecuación tiene solución y es de la forma $x_0=nr$ y $y_0=mr$.\\
+  Ahora bien para si $(x_0,y_0)$ es una solución, se deberá exhibir como son el resto de las 
+  soluciones.\\
+  Sean $x_0, y_0$ y $x', y'$ soluciones se sigue que $ax_0 + by_0 = c$ y $ax' + by' = c$, igualando
+  ambas ecuaciones se tiene que $ax_0 + by_0 = ax' + by'$, por consiguiente:
+  $$a(x' -x_0) = b(y_0 - y') \quad (1)$$
+  Dividiendo ambos lado de $(1)$ entre $d=(a,b)$:
+  $$\frac{a}{d}(x' -x_0) = \frac{b}{d}(y_0 - y') \quad (2)$$
+  Ahora debemos enunciar el siguiente teorema y corolario que nos serán de utilidad.
+  \begin{theorem}
+  Sean $a,b \in \Z$. Si $(a,b)=d$ entonces $(\frac{a}{d}, \frac{b}{d})=1$
+  \end{theorem}
+  \begin{corollary}
+  Sean $a,b \in \Z$ con $(a,b)=1$. Si $a \mid bc$ entonces $a \mid c$.
+  \end{corollary}
+  Utilizando el teorema y corolario anterior se sigue que $\frac{b}{d} \mid x' - x_0$ y por consiguiente 
+  $x' - x_0 = (\frac{b}{d})t$ para alguna $t \in \Z$. Se tiene entonces que:
+  $$x' = x_0 +(\frac{b}{d})t$$
+  Ahora sustituyendo $x' - x_0$ en $(2)$ se tiene que:
+  \begin{align*}
+  a(\frac{b}{d})t = b(y_0 - y')\\
+  (\frac{a}{d})t = y_0 - y'\\
+  y' = y_0 - (\frac{a}{d})t
+  \end{align*}
+  Ergo la forma del resto de las ecuaciones son:
+  $$x' = x_0 +(\frac{b}{d})t \quad \land \quad y' = y_0 - (\frac{a}{d})t$$
 \end{p}
 %
 \begin{p}
@@ -510,8 +562,34 @@
 %
 \begin{pp}
   Demuestra que para todo $a>1$ y exponentes $n,m>0$ se cumple que $(a^n-1,a^m-1)=a^{(n,m)}-1$.\\
-  \sol TODO
-  
+  \sol Sea $d=(a^n-1,a^m-1)$, se sigue por definición que $d \mid a^n-1$ y $d \mid a^m-1$.
+  Expresando a $(n,m)=nx+my$. Entonces:
+  \begin{align*}
+  d \mid a^{nx}-1 && \text{(Elevando $d \mid a^n-1$ a $x$) \quad $(1)$}\\
+  d \mid a^{my}-1 && \text{(Elevando $d \mid a^m-1$ a $y$) \quad $(2)$}\\
+  d \mid (a^{nx}-1)(a^{my}-1) && \text{(Multiplicando $(1)$ y $(2)$)}\\
+  d \mid a^{ny+my} - a^{nx} - a^{my} + 1 && \text{(Multiplicando productos)}\\
+  d \mid a^{(n,m)} - a^{nx} - a^{my} + 1 && \text{(Recordando que $(n,m)=nx+my$) \quad $(3)$}
+  \end{align*}
+  Hecho ese análisis, por definición de divisivilidad se tiene que:
+  \begin{align*}
+  d \mid a^n-1 \iff dp = a^n-1 && \quad (4)\\
+  d \mid a^m-1 \iff dq = a^m-1 && \quad (5)
+  \end{align*}
+  Elevando $(4)$ y $(5)$ a $x$ y $y$ respectivamente se tiene que:
+  \begin{align*}
+  dp' = a^{nx}-1 \iff a^{nx} = dp' + 1&& \quad (6)\\
+  dq' = a^{my}-1 \iff a^{my} = dq' +1 && \quad (7)
+  \end{align*}
+  Regresando a $(3)$:
+  \begin{align*}
+  d \mid a^{(n,m)} - (dp' +1) - (dq' +1)+ 1 && \text{(Sutituyendo con $(6)$ y $(7)$)}\\
+  ds =   a^{(n,m)} - dp' -1 - dq' - 1+ 1 && \text{(Definición de divisibilidad $\exists s \in \Z$)}\\
+  ds + dp' + dq' =   a^{(n,m)}  -1 && \text{(Agrupado)}\\
+  d(s + p' + q') =  a^{(n,m)}  -1 && \text{(Factorizando)}\\
+  dt = a^{(n,m)}  -1 && \text{($t \in \Z$ tal que $t = s + p' + q'$)}
+  \end{align*}
+  Ergo $(a^n-1,a^m-1)=a^{(n,m)}-1$.
 \end{pp}
 %
 \begin{pp}
@@ -521,13 +599,39 @@
     \[
       \frac{a}{b}+\frac{c}{d}\in\Z \quad\ent\quad b=\pm d.
     \]
-    \sol TODO
+    \sol Por hipótesis se tiene que $\frac{a}{b}+\frac{c}{d}\in\Z$, se sigue que 
+    $\frac{ad+bc}{bd}=n \iff ad+bc=nbd$.
+    \begin{align*}
+    ad = nbd - bx \implies ad = b(nd -x) && \quad (1)\\
+    bc = nbd - ad \implies bc = d(nb -a) && \quad (2)
+    \end{align*}
+    Teniendo $(1)$ y $(2)$, se aplicará en ambas la definición de divisibilidad:
+    \begin{align*}
+    b \mid ad && (3)\\
+    d \mid bc && (4)\\
+    \end{align*}
+    Usando las hipótesis de $(a,b)=1=(c,d)$:
+    \begin{align*}
+    b \mid d && \text{(Porque $(a,b)=1$)} \quad (5)\\
+    d \mid b && \text{(Porque $(c,d)=1$)} \quad (6)
+    \end{align*}
+    Entonces de $(5)$ y $(6)$ se siguen los siguientes casos $b \leq d$ y $d  \leq b$. Por tanto $b=d$.
   \item Los n\'umeros arm\'onicos $H_n$ se definen como las sumas parciales de la serie arm\'onica, es decir
   \[
     H_n:=\sum_{k=1}^n\frac{1}{k}.
   \]
   Prueba que $H_n\not\in\Z$ para toda $n>1$.\\
-  \sol TODO
+  \sol Sea $L$ el mínimo común múltiplo de $1,2,\ldots,n$ entonces $H_n$ puede ser escrito como una fracción 
+  con denominador $L$. Para $1 \leq k \leq n$, escribimos $L = ka_k$ con $a_k \in \Z^n$, 
+  así $1/k = a_k/L$. Entonces.
+  $$H_n = \sum_{k=1}^{n} \frac{1}{k}= \frac{\sum_{k=1}^{n} a_k} {L}$$
+  Daso que $n \geq 2$, $L$ es par. Se mostrará que $\sum_{k_1}^{n}ak$ es impar, de tal forma la proporción 
+  no es entera. Fijamos $2^r$ como la potencia más grande de $2$ hasta $n$: $2^r \leq n \leq 2^{r+1}$. 
+  El único entero hasta $n$ divisible por $2^r$ es $2^r$, dado que $2/2^r > n$. Por lo tanto $L = 2^rb$ 
+  donde $b$ es impar, entonces $a^rb = ka_k$ para $1 \geq k \geq n$. Cuando $k = 2^r$ vemos que $a_k=b$ es 
+  impar. Cuando $k \neq 2^r$, $k$ no es divisible por $r^r$, así que $a_k$ debe ser par. Por tanto en el 
+  numerador $\sum_{k=1}^{n}a_k$, un término (para $k=2^r$) es impar y el resto es par, entonces la suma 
+  total es impar.
   \end{enumerate}
 \end{pp}
 
@@ -552,6 +656,11 @@ Springer-Verlag, New York, 1976.
 
 \bibitem{}
 Notas tomadas en clase del curso de Teoría de los Números I (2019-2).
+
+\bibitem{}
+KEITH CONRAD,
+\textit{THE p-ADIC GROWTH OF HARMONIC SUMS}.\\
+\url{https://kconrad.math.uconn.edu/blurbs/gradnumthy/padicharmonicsum.pdf}
 
 \end{thebibliography}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
