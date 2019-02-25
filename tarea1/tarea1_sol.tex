@@ -66,7 +66,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title{
-    \vspace{-1.5cm}
+    \vspace{-2cm}
         Universidad Nacional Autónoma de México\\
         Facultad de Ciencias\\
         Teoría de los Números I\\
@@ -169,17 +169,17 @@
     
   \item Sea $p\in\Z$ un n\'umero primo. Prueba que $\Z_{(p)}:=\{\frac{a}{b}\in\Q\mid p\not\,\mid b\}$
     es un anillo con las operaciones usuales de $\Q$ y describe el conjunto $U(\Z_{(p)})$.\\
-  \sol TODO
+  \sol \textbf{Quiero que este sea mi ejercicio gratis.}
     
   \item Prueba que cuales quiera dos elementos primos de $\Z_{(p)}$ son asociados (un elemento
     $q$ en cualquier anillo conmutativo con 1 es primo si no es una unidad y adem\'as cumple
     que $q\mid ab \ent q\mid a$ \'o $q\mid b$).\\
-  \sol TODO
+  \sol \textbf{Quiero que este sea mi ejercicio gratis.}
   
   \item Prueba que si $\frac{a}{b}\in\Z_{(p)}$ no es una unidad, entonces
     $\frac{a}{b}+1\in U(\Z_{(p)})$. Explica porque la prueba de Euclides de la infinitud de los
     n\'umeros primos falla para $\Z_{(p)}$.\\
-  \sol TODO
+  \sol \textbf{Quiero que este sea mi ejercicio gratis.}
   
   \end{enumerate}
   
@@ -226,12 +226,20 @@
   expresamos a  $(a+tb,b)=d$ como dicha combinación teniendo entonces $(a+tb)m + bn = d$ con $m,n \in \Z$, 
   expandiendo el producto y asociando tenemos $am + (tm+n)b = d$ y por otro lado tenemos que 
   $ap' + bq' = d$. Por tanto, podemos expresar a ambos $(a+tb,b)$ y $(a,b)$ como la menor combinación lineal 
-  positiva y ambos tienen el mismo máximo común divisor. Ergo $(a+tb,b)=(a,b)$ para toda $t \in\Z$.
+  positiva y ambos tienen el mismo máximo común divisor. Ergo $(a+tb,b)=(a,b)$ $\forall$ $t \in\Z$.
   
   \item Si $a'\mid a$, $b'\mid b$ y $(a,b)=1$ entonces $(a',b')=1$. En palabras esto es: si $a$ y $b$ son 
   primos relativos, entonces sus divisores son primos relativos entre ellos.\\
-  \sol TODO
-
+  \sol Por demostrar que $(a',b')=1$. Una de las hipótesis dice que $(a,b)=1$, reescribiendo el m.c.d. como
+  $ax+by=1$ para algunos $x,y \in \Z$. Se sigue que:
+  \begin{align*}
+  ax+by=1 && \text{(Mínima combinación lineal de $(a,b)$)}\\
+  a'p=a \quad \land \quad b'q=b && \text{(Por hipótesis y aplicando definición de divisibilidad)}\\
+  (a'p)x + (b'q)y = 1 && \text{(Sitituyendo)}\\
+  a'(px) + b'(qy) = 1 && \text{(Asociando)}\\
+  \end{align*}
+  Ergo si $a$ y $b$ son primos relativos, entonces sus divisores son primos relativos entre ellos.
+  
   \item Si $(a,b)=d$ entonces $\left( \frac{a}{d}, \frac{b}{d} \right)=1$. \\
   \sol Sea $\left( \frac{a}{d}, \frac{b}{d} \right)=d'$. Por demostrar que $d'=1$. Como $d'$ es un factor 
   común de $\frac{a}{d}$ y de $\frac{b}{d}$, entonces $\exists l, m$ tales que $\frac{a}{d} = ld'$ y 
@@ -241,11 +249,31 @@
   $\left( \frac{a}{d}, \frac{b}{d} \right)=1$.
   
   \item Si $(a,b)=1=(a,c)$, entonces $(a,bc)=1$.\\
-  \sol TODO
+  \sol Por demostrar que $(a,bc)=1$. Se tiene por hipótesis que $(a,b)=1=(a,c)$ lo cual se puede expresar como
+  $ax+by=1$ y $ap+cq=1$ para algunos $x,y,p,q \in \Z$. Se sigue entonces:
+  \begin{align*}
+  (ax+by)(ap+cq)=1 && \text{(Multiplicando ambas ecuaciones)}\\
+  axap+axqp+byap+bycq = 1 && \text{(Aplicando producto)}\\
+  a(xap+ xqp + byp) + bc(yq) = 1 && \text{(Factorizando y asociando)}\\
+  \end{align*}
+  Por tanto $(a,bc)=1$.
   
-  \item  Sea $a_0,a_1,a_2,\ldots$ la sucesi\'on de Fermat 1,1,2,3,5.$\ldots$ definida recursivamente como 
+  \item  Sea $a_0,a_1,a_2,\ldots$ la sucesi\'on de Fibonacci 1,1,2,3,5.$\ldots$ definida recursivamente como 
   $a_{n+1}:=a_n+a_{n-1}$ donde $a_0=1=a_1$. Prueba que $(a_n,a_{n+1})=1$ para toda $n$.\\
-  \sol TODO
+  \sol Prueba por inducción. Sea $n \in \N$, demostrar que la propiedad $P(n)$ se cumple $\forall n \in \N$\\
+  \textbf{Caso base:} para $n=2$, $P(2) = a_2 = a_1 + a_0=2$. Se cumple que $(a_1, a_2) = (2,1) = 1$.\\
+  \textbf{Hipótesis de inducción:} Suponer que $k \in \N$ con $k>1$, entonces se cumple $P(k)$ tal que
+   $(a_k, a_{k+1})= 1$ para toda $k \in \Z$.\\
+   \textbf{Paso inductivo:} Probar que se cumple $P(n+1)$.
+   \begin{align*}
+   (a_{k+1}, a_{k+2})
+       &= (a_{k+1}, a_{k+1} +a_k) && \text{(Definición de Fibonacci, $a_{k+2}:=a_{k+1}+a_{k}$)}\\
+       &= (a_{k+1} +a_k, a_{k+1}) && \text{(Conmutanto)}\\
+       &= (a_{k+1} , a_{k}) && \text{(Usando que $(a,b) = (a+b, a)$)}\\
+       &= 1 && \text{(Por hipótesis de inducción)}
+   \end{align*}
+   Por tanto $(a_n,a_{n+1})=1$ $\forall n$.
+   
   
   \end{enumerate}
 \end{p}
@@ -280,9 +308,20 @@
   definición de $m$. Ergo $r = 0$. Para $b$ la prueba es totalmente análoga.
   
   \item $[ab,ac]=a[b,c]$\\
-  \sol TODO
+  \sol En el inciso $d)$ se demostró qué $[a,b]=\frac{ab}{(a,b)}$, por consiguiente podemos expresar a
+  $[ab,ac]$ como $[ab,ac]=\frac{abac}{(ab,ac)}$ de lo que se sigue que:
+  \begin{align*}
+  [ab,ac]
+      &= \frac{abac}{(ab,ac)} && \text{(Por prueba del inciso $d)$)}\\
+      &= \frac{abac}{abx+acy} && \text{(Mínima combinación lineal de ab, cy)}\\
+      &= \frac{abac}{a(bx + cy)} && \text{(Factorizando)}\\
+      &= \frac{abc}{bx+cy} && \text{(Reduciendo factor común)}\\
+      &= a \frac{bc}{(b,c)} && \text{(Reescribiendo como m.c.d a $bx+cy$)}\\
+      &= a [b, c] && \text{(Por inciso $d)$)}
+  \end{align*}
+  Ergo $[ab,ac]=a[b,c]$.
   
-  \item $(a,b)=[a,b]\ ent a=b$\\
+  \item $(a,b)=[a,b] \ent a=b$\\
   \sol Tenemos por el inciso $d)$ que $[a,b]=\frac{ab}{(a,b)}$. Sabiendo eso, rescribiremos al m.c.m. como 
   $[a,b] = \frac{ab}{(a,b)}$ pero por hipótesis se tiene que $(a,b)=[a,b]$, sustituyendo $[a,b]$ se tiene que 
   $(a,b) = \frac{ab}{(a,b)}$, despejando se sigue que $(a,b)^2 = ab \iff a=b$ porque $ab$ tiene que 
@@ -312,11 +351,46 @@
     &= (p_{1}^{a_1}p_{2}^{a_2} \cdots p_{n}^{a_n})(p_{1}^{b_1}p_{2}^{b_2} \cdots p_{n}^{b_n}) \\
     &= ab
   \end{align*}
-
   Ergo $[a,b]=\frac{ab}{(a,b)}  \iff ab=(a,b)[a,b]$  
   
   \item $(a+b,[a,b])=(a,b)$\\
-  \sol TODO
+  \sol Antes de proceder con la demostración enunciaremos un lema y un teorema que usaremos.
+  \begin{lemma}
+  Sean $a,b \in \Z$, Sea $d = (a,b)$ entonces $d = (a+b,a) = (a+b,b)$.\\
+  \underline{Demostración:} 
+  \begin{align*}
+  (a,b) &= ax + by\\
+    &= ax + by + (ay - ay)\\
+    &= ay + by + ax - ay\\
+    &= y(a+b) + a(x-y)\\
+    &= (a+b)y + ap'
+  \end{align*}
+  Por tanto $(a,b) = (a+b,a)$
+  \begin{align*}
+  (a,b)
+    &= ax + by\\
+    &= ax + by + (bx - bx)\\
+    &= ax + bx + by - bx\\
+    &= x(a+b) + b(y-x)\\
+    &= (a+b)x + bq'
+  \end{align*}
+  Por tanto $(a,b) = (a+b,b)$
+  \end{lemma}
+
+  \begin{theorem}
+  El m.c.d. se distribuye sobre el m.c.m. Sean $a,b,c \in \Z$, se sigue que:
+  $$(a,[b,c]) = [(a,b),(a,c)]$$
+  \end{theorem}
+  
+  Sabiendo eso procederemos con la demostración:
+  \begin{align*}
+  (a+b, [a,b]) \\
+    &= [(a+b,a), (a+b, b)] && \text{(Distributividad del m.c.d. sobre m.c.m)}\\
+    &= \frac{(a,b)}{(a,b)} && \text{(Aplicando el lemma)}\\
+    &= \frac{(a,b)(a,b)}{(a,b)} && \text{(Por inciso $d)$)}\\
+    &= (a, b) && \text{(Simplificando)}
+  \end{align*}
+  Ergo $(a+b,[a,b])=(a,b)$.
   
   \end{enumerate}
 \end{p}
@@ -405,7 +479,33 @@
 %
 \begin{p}
   Prueba que todo entero mayor que 6 se puede expresar como suma de dos enteros primos relativos.\\
-  \sol TODO
+  \sol Antes de proceder, se provará probar dos lemas que serán de gran utilidad para la siguiente demostración.
+  \begin{lemma}
+  Sean $a, b, d \in \Z$ si $d \mid a$ y $d \mid b$, entonces $d \mid a-b$.
+  \begin{align*}
+  dp = a \quad \land \quad dq=b && \text{(Definición de divisibilidad)}\\ 
+  dp - dq = a -b && \text{(Restando la ec.2 a ec.1)}\\
+  d(p-q) = a-b && \text{(Asociando)}
+  \end{align*}
+  Por tanto $d \mid a-b$.
+  \end{lemma}
+  \begin{lemma}
+  \emph{Dos enteros consecutivos son primos relativos}. Sea $n \in \Z$, suponer que $(n, n+1)=p$, lo que
+  por definición de divisivilidad se sigue que $p \mid n$ y $p \mid n+1$, por el lema anterior se sigue que
+  $p \mid n - (n+1)$ lo que implica que  $p \mid 1$. Por definición de divisibilidad $pr=1$, pero esto ocurre
+  si y solo si $r=1$. Por tanto $(n, n+1)=p=1$.
+  \end{lemma}
+  
+  Teniendo ésos dos lemas, se continuará con la demostración. Sea $n>6$, se procederá a analizar por casos.
+  \begin{itemize}
+    \item Si $n$ es par. Entonces $n$ es de la forma $n=2k \backepsilon k \in \Z$ con $k \geq 4$
+    resscribiendo a $n$ como $2k=k+k=(k+2)+(k-2)$ o $2k=k+k=(k+4)+(k-4)$, y  dados cualesquiera
+    dos números impares $a$ y $b$ si su diferencia es $2$ ó $4$ se sigue que son primos relativos.
+    \item Si $n$ es impar. Entonces $n$ es de la forma $n=2k+1 \backepsilon k \in \Z$ con $k \geq 3$ 
+    resscribiendo a $n$ como $2k+1= k + (k +1)$ se sigue que $k$ y $k+1$ son ambos primos relativos
+    por el lemma previamente citado.
+    
+  \end{itemize}
 \end{p}
 %
 \begin{pp}
@@ -422,7 +522,7 @@
       \frac{a}{b}+\frac{c}{d}\in\Z \quad\ent\quad b=\pm d.
     \]
     \sol TODO
-  \item Los n\'umero' arm\'onicos $H_n$ se definen como las sumas parciales de la serie arm\'onica, es decir
+  \item Los n\'umeros arm\'onicos $H_n$ se definen como las sumas parciales de la serie arm\'onica, es decir
   \[
     H_n:=\sum_{k=1}^n\frac{1}{k}.
   \]
@@ -438,9 +538,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{thebibliography}{}
 
-\bibitem{}
-Notas tomadas en clase del curso de Teoría de los Números I (2019-2).
-
 \bibitem{} 
 Thomas Koshy. 
 \textit{Elementary Number Theory with Applications. 2nd Edition.}
@@ -452,6 +549,9 @@ Academic Press.
 Apostol, Tom M. 
 \textit{Introduction to Analytic Number Theory.} 
 Springer-Verlag, New York, 1976.
+
+\bibitem{}
+Notas tomadas en clase del curso de Teoría de los Números I (2019-2).
 
 \end{thebibliography}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
