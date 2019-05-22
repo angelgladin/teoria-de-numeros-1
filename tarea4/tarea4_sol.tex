@@ -1,0 +1,632 @@
+%%%
+ %
+ % Copyright (C) 2019 Ángel Iván Gladín García
+ %
+ % This program is free software: you can redistribute it and/or modify
+ % it under the terms of the GNU General Public License as published by
+ % the Free Software Foundation, either version 3 of the License, or
+ % (at your option) any later version.
+ %
+ % This program is distributed in the hope that it will be useful,
+ % but WITHOUT ANY WARRANTY; without even the implied warranty of
+ % MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ % GNU General Public License for more details.
+ %
+ % You should have received a copy of the GNU General Public License
+ % along with this program.  If not, see <http://www.gnu.org/licenses/>.
+%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[11pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[margin=1in]{geometry}
+ 
+\usepackage{listings}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{enumerate}
+\usepackage{enumitem}
+
+\usepackage{longtable}
+\usepackage{hyperref}
+\usepackage{commath}
+
+\usepackage{bbm}
+\usepackage{dsfont}
+\usepackage{mathrsfs}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{mathtools}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\theoremstyle{definition}\newtheorem{p}{Ejercicio}
+
+\renewcommand{\theenumi}{\alph{enumi}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Oh}{\mathcal{O}} %% Notacion "O"
+\newcommand{\ent}{\Longrightarrow}
+\newcommand{\lra}{\longrightarrow}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\sii}{\Longleftrightarrow}
+\newcommand{\clase}[1]{\overline{#1}}  %% barrita sobre letras
+\newcommand{\ord}{\text{ord}}
+\newcommand{\leg}[2]{\left( \frac{#1}{#2}\right)} %% Simbolo de Legendre
+\newcommand{\sol}{\textbf{\underline{Solución}: }} %% Solución
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{
+    \vspace{-2cm}
+        Universidad Nacional Autónoma de México\\
+        Facultad de Ciencias\\
+        Teoría de los Números I\\
+    \vspace{.5cm}
+    \large
+        \textbf{Tarea 4}\\
+}
+\author{
+    Ángel Iván Gladín García\\
+    No. cuenta: 313112470\\
+    \texttt{angelgladin@ciencias.unam.mx}
+}
+\date{24 de mayo 2019}
+\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newtheorem{theorem}{Teorema}
+\newtheorem{example}{Ejemplo}
+\newtheorem{corollary}{Corolario}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definición}
+\newtheorem{prop}{Proposición}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{Congruencias y Reciprocidad Cuadrática}
+Los n\'umeros entre los par\'entesis denota el puntaje de ese ejercicio. Hay un total de 70 puntos.
+
+%%%%%%%%%%%%%%%
+\begin{p}(2)
+Criterios de divisibilidad. Prueba que:
+
+\begin{enumerate}
+    \item(1) 3 divide a $n$ si y solamente si la suma de sus d\'igitos es divisible entre 3.\\
+    \sol Antes de proceder con la demostración, mostraremos que sean dos enteros $n$ y $s$,
+    donde $n$ es un entero y $s$ es la represtación de la suma de los dígitos de $n$, de la 
+    forma $n = a_0 + a_1 10^1 + \ldots + a_n 10^n$ y $s = a_0 + a_1 + \ldots + a_n$. La resta $n-s$
+    divisible por $3$.
+    \begin{align*}
+        n - s &= a_0 + a_1 10^1 + \ldots a_n 10^n - a_0 - a_1 - \ldots - a_n\\
+              &= (a_0 - a_0) + (a_1 10^1 - a_1) + \ldots + (a_n 10^n - a_n)\\
+              &= a_1(10^1 - 1) + \ldots + a_n(10^n - 1)\\
+              &= \sum_{i=1}^{n} a_i b_i && \text{Con $b_i = (10^i - 1)$}
+    \end{align*}
+    Entonces se sigue que $9 \mid b_i$ y en particular $3 \mid b_i$. Ergo $3 \mid n-s$.\\
+    $\Longrightarrow) $ Por demostrar que la $s$, suma de los dígitos de $n$ es divisible entre $3$.
+    \begin{align*}
+        3 \mid n && \tag{1} \text{Por hipótesis}\\
+        3 \mid n - s && \tag{2} \text{Por análisis previo}\\
+        3(r-s) = s && \text{Aplicando definición de divisibilidad y restando (1) y (2)}\\
+    \end{align*}
+    Por tanto $3 \mid s$.\\
+    $\Longleftarrow) $ Por demostrar que 3 divide a $n$.\\
+    Análogo al caso anterior.
+
+    \item(1) 11 divide a $n$ si y solamente si la suma alternada de sus d\'igitos es divisible por 11.\\
+    \sol Evidentemente $10 \equiv -1 \mod{11}$.\\
+    Sea $n = a_k 10^k + a_{k-1} 10^{k-1} + \ldots + a_0$ la representación del número en base 10.
+    \begin{align*}
+        &\quad
+        n = a_k 10^k + a_{k-1} 10^{k-1} + \ldots + a_0 \equiv 0 \mod{11}\\
+        \iff&\quad
+            \begin{cases}
+            a_k 10^k \equiv a_k (-1)^k \mod{11}\\
+            a_{k-1} 10^{k-1} \equiv a_{k-1} (-1)^{k-1} \mod{11}\\
+            \qquad \vdots\\
+            a_0 \equiv a_0 \mod{11}
+            \end{cases}\\
+        \iff&\quad
+            a_k 10^k + a_{k-1} 10^{k-1} + \ldots + a_0 \equiv a_k (-1)^k + a_{k-1}(-1)^{k-1} + a_0 \mod{11}\\
+    \end{align*}
+
+\end{enumerate}
+\end{p}
+%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%
+\begin{p}(2)
+Prueba que las ecuaciones $3x^2+2=y^2$ y $7x^3+2=y^3$ no tienen soluci\'on en los enteros.
+Tambi\'en prueba que $5n^3+7n^5 \equiv 0\mod 12$.
+\begin{enumerate}
+    \item Por demostrar que la ecuación no tiene $3x^2+2=y^2$ solución en los enteros.\\
+    \sol Reescribiendo la ecuación se tiene $3x^2 = y^2 -2$ lo que implica que 3 es un múltiplo de
+    $y^2 -2$ y por definición de divisibilidad se sigue que $3 \mid y^2 - 2$ que visto como
+    congruencia es $y^2 \equiv 2 \mod{3}$.\\
+    Por demostrar que todo número perfecto no deja residuo 2 cuando es dividido por 3.\\
+    Sea $n^2$ modulo 3, se puede expresar $n$ de la forma $3r$ ,$3r+1$ y $3r+2$, entonces 
+    $n^2 = 9r^2$, $n^2 = 9r^2 + 6r + 1$ o $n^2  = 9r^2 + 12r + 4 = 9r^2 + 12r + 1$. Mostrando así
+    que todo número perfecto deja de residuo 0 ó 1 módulo 3 y por tanto $y^2 \not\equiv 2 \mod{3}$.
+
+    \item Por demostrar que la ecuación no tiene $7x^3+2=y^3$ solución en los enteros.\\
+    \sol Reescribiendo se tiene que $7x^2 = y^3 -2$ lo que significaría que $y^3 \equiv -2 \mod{7}$.\\
+    Viendo los residuos que deja la congruencia que son:
+    \begin{itemize}
+        \item $0^3 = 0 \equiv 0 \mod{7}$
+        \item $1^3 = 1 \equiv 1 \mod{7}$
+        \item $2^3 = 8 \equiv 1 \mod{7}$
+        \item $3^3 = 27 \equiv 6 \mod{7}$
+        \item $4^3 = 16 \cdot 4 = 2 \cdot 4 \equiv 1 \mod{7}$
+        \item $5^3 = 15 \cdot 5 = 4 \cdot 5 = 20 \equiv 6 \mod{7}$
+        \item $6^3 = 36 \cdot 6 = 1 \cdot 6 \equiv 6 \mod{7}$
+    \end{itemize}
+    Ergo, viendo los casos exhaustivamente $y^3 \not\equiv -2 \mod{7}$.
+
+    \item Por demostrar que $5n^3+7n^5 \equiv 0 \mod{12}$\\
+    \sol No supe como hacerlo y opté por hacer un programa en \textit{Python} para ver que
+    $5n^3+7n^5 \equiv 0 \mod{12}$.
+    \begin{lstlisting}[language=Python]
+      # Modulo de la congrunencia
+      m = 12
+      # Polinomio que es evaluado en n modulo m
+      f = lambda n, m: pow(5 * n, 3, m) + pow(7 * n, 5, m)
+      # Contador de posibles valores que sera congruente
+      r = 0
+      # Correr la x en [0, m)
+      for x in range(m):
+          # Verificar si es congruente
+          if f(x, m) % m == 0:
+              r += 1
+      # Numero de veces que la x fue congruente
+      print(r)      
+    \end{lstlisting}
+    Después de ejecutar el programa el, se vio que $r=12$ lo que significa que evaluado la congruencia
+    todos los valores que puede tomar hace que la congruencia se satisfaga.
+\end{enumerate}
+
+\end{p}
+%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%
+\begin{p}(3)
+Prueba que
+    \[
+      (n-1)! \equiv
+      \begin{cases}
+        -1\mod n & n\;\text{es primo} \\
+        0\mod n & n\;\text{es compuesto} \\
+        2\mod n & n=4
+      \end{cases}
+    \]
+
+\begin{enumerate}
+    \item $(n-1)! \equiv -1 \mod{n} \quad n$ es primo\\
+    \sol \textbf{Teorema de Wilson}. Si $p=2$ entonces se sigue que $1 \equiv -1 \mod{2}$, lo cual es 
+    válido para $p=2$.\\
+    Sea $p>2$. El juego de residos de $1$ a $p-1$ son invertibles módulo $p$ por un corolorio que dice
+    que $ax \equiv b \mod{m}$ tiene solución si y solo sí $(a,m) = 1$ y en particular tomando la
+    congruencia $ax \equiv 1 \mod m$ si y solo si $(a,m) = 1$, pero esta congruencia se satisface si 
+    tomamos a $x = a^{-1}$ resultando como $a a^{-1} \equiv 1 \equiv 1 \mod{m}$. Pero por un lema que dice
+    que un entero positivo $a$ es autoinvertible módulo $p$ si y solo si $a \equiv \pm 1 \mod{p}$ se
+    sigue que 1 y $p-1$ son sus propios autoinversos.\\
+    Sabiendo eso, agrupando los $p-3$ residuos en pares con $\frac{p-3}{2}$ parejas de inversos $a$
+    y $b=a^{-1}$ tales que $ab \equiv 1 \mod{p}$ para cada pareja, tenindo así:
+    \begin{align*}
+        2 \cdot 3 \cdots (p-2) \equiv & 1 \mod{p}\\
+        (p-1)! &= 1 \cdot [2 \cdot 3 \cdots (p-2)] \cdot (p-1)\\
+            &\equiv 1 \cdot 1 \cdot (p-1) \mod{p}\\
+            &-1 \mod{p}
+    \end{align*}
+
+    \item $(n-1)! \equiv 0 \mod{n} \quad n$ es compuesto\\
+    \sol Suponiendo que $n$ es compuesto, entonces es de la forma $n=ab$ donde hay dos posibles
+    casos; cuando $a \neq b$ y $a = b$.\\
+    Si $n=ab$ con $a \neq b$ y $1 < a,b < n$, entonces se tiene que:
+    $$(n-1)! = 1 \cdot 2 \cdots a \cdots b \cdots (n-1)$$
+    y por tanto $n = ab \mid (n-1)!$.\\
+    En el caso de que $a = b$, ósea $n = a^2$ y como $a > 1$ se sigue que:
+    $$(n-1)! = 1 \cdot 2 \cdots a \cdot 2a \cdots (a-k)a \cdots (a^2 - 1)$$
+    Pero $2a < a^2 = n$, pero ambos $a$ y $2a$ serán factores de $(n-1)!$ y por tanto
+    $n \mid (n-1)!$.
+
+
+    \item $(n-1)! \equiv 2 \mod{n} \quad n=4$\\
+    \sol Si $n = 4$, entonces $(n-1)! = 2 \cdot 3 = 6 \equiv 2 \mod{4}$.
+\end{enumerate}
+\end{p}
+%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%
+\begin{p}(6)
+Ecuaciones polinomiales m\'odulo un n\'umero compuesto.
+
+\begin{enumerate}
+    \item(1) Sea $f(x)$ un polinomio con coeficientes enteros y $m=p_1^{\alpha_1}\cdots p_s^{\alpha_s}$.
+    Prueba que $f(x)\equiv 0\mod m$ tiene soluci\'on si y solamente si $f(x)\equiv 0\mod p_i^{\alpha_i}$
+    tiene soluci\'on para toda $i=1,\ldots,s$.\\
+    \sol $\Longrightarrow) $ Sea $x_0$ una solución de $f(x)\equiv 0\mod m$, tal que $f(x_0)\equiv 0\mod m$.
+    Como $p_i^{\alpha_i} \mid m$ para toda $i=1, \ldots, s$, se sigue que $f(x_0)\equiv 0\mod p_i^{\alpha_i}$
+    para toda $i=1, \ldots, s$.\\
+    $\Longleftarrow) $ Si existe $x_i$ tal que $f(x_i)\equiv 0\mod p_i^{\alpha_i}$ para $i=1, \ldots, s$, 
+    por el Teorema chino del residuo existe $x$ tal que $x \equiv x_i \mod p_i^{\alpha_i}$ para
+    $i=1, \ldots, s$, por tanto $x$ es una solución.
+
+    \item(2) Define $N$ como la cantidad de soluciones en $\Z/m\Z$ de $f(x)\equiv 0\mod m$ y $N_i$
+    como la cantidad de soluciones en $\Z/p_i^{\alpha_i}\Z$ de $f(x)\equiv 0\mod p_i^{\alpha_i}$ para
+    toda $i=1,\ldots,s$. Prueba que $N=N_1N_2\cdots N_s$. Tambi\'en calcula $N$ para $f(x)=x^2-1$ y
+    $m=2^{\alpha}$ para cualquier exponent $\alpha\geq 0$.
+    \begin{itemize}
+      \item Por demostrar que $N=N_1N_2\cdots N_s$.\\
+      \sol sdfsdf
+
+      \item sdfsd
+    \end{itemize}
+
+    \item(2) Ahora fija $f(x)=x^2-1$ y definimos $S_m\subseteq\Z/m\Z$ como las soluciones de la
+    ecuaci\'on $x^2\equiv 1\mod m$. Prueba que $S_{p^{\alpha}}=\{\overline{1},\overline{-1}\}$ para
+    todo primo $p>2$ y exponente $\alpha>0$.\\
+    \sol
+
+    \item(1) Junta los resultados anteriores para calcular, en general, cuantas soluciones en $\Z/m\Z$
+    tiene la congruenca $x^2\equiv 1\mod m$.\\
+    \sol
+\end{enumerate}
+
+\end{p}
+%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%
+\begin{p}(3)
+Sea $p$ un primo y $\binom{p}{k}$ el coeficiente binomial. Prueba que para $0<k<p$, se tiene que
+$p\mid\binom{p}{k}$. Concluye que $(a+b)^p\equiv a^p+b^p\mod p$ para toda $a,b\in\Z$. Enuncia y
+prueba el peque\~no teorema de Fermat con este hecho.
+\begin{itemize}
+  \item Por demostrar que $p\mid\binom{p}{k}$\\
+  \sol Evidentemente por definición del teorema del binomio se tiene que:
+  $$\binom{n}{m} = \frac{n!}{m!(n-m)!}$$
+  Y reescribiendo se tiene que $p \mid p \frac{(p-1)!}{k!(p-k)!}$ y $p$ divide al numerador y
+  niguno de sus factores del denominador es divisible por $p$.
+  
+  \item Por demostrar que $(a+b)^p\equiv a^p+b^p\mod p$\\
+  \sol Usando el teorema del binomio, se tiene que:
+  $$(a+b)^n = a^n + \sum_{m=1}^{n-1} \binom{n}{m}a^{n-m} b^m+ b^n$$
+  Entonces:
+  \begin{align*}
+    (a+b)^p
+      &= a^p + \sum_{k=1}^{p-1} \binom{p}{k}a^{p-k}b^k + b^p \mod p\\
+      &\equiv a^p + b^p \mod p && \text{Porque $p \mid \sum_{k=1}^{p-1} \binom{p}{k}a^{p-k}b^k$}
+  \end{align*}
+
+  \item \textbf{(Pequeño teorema de Fermat)} Sea $p$ un primo y $a$ cualquier entero 
+  tal que $p \nmid a$. Entonces:
+  $$a^{p-1} \equiv 1 \mod p$$
+  \sol Sea $p$ un primo y sea cualquier entero $a$ talque $p \nmid a$. Entonces el juego de residos
+  de los enteros $a, 2a, 3a, \ldots , (p-1)a$ módulo p son una permutación de los enteros
+  $1,2,3,\ldots,(p-1)$.\\
+  Sabiendo eso, si tomamos el juego de residos $a, 2a, 3a, \ldots , (p-1)a$ módulo $p$ son los mismos
+  como los enteros $1,2,3,\ldots,(p-1)$ en el mismo orden, así que su productos son congruentes módulo
+  $p$, que es, $a \cdot 2a \cdot 3a \cdots (p-1)a \equiv 1 \cdot 2 \cdot 3 \cdots (p-1) \mod p$.
+  Escrito de otra forma $(p-1)!a^{p-1} \equiv (p-1)! \mod p$.\\
+  Recordando un teorema que dice que si $ac \equiv bc \mod m$ y $(c,m) = 1$, entonces $a \equiv b \mod m$.\\
+  Usando el teorema se tiene que $((p-1)!, p)=1$, por tanto $a^{p-1} \equiv 1 \mod p$.
+\end{itemize}
+\end{p}
+%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%
+\begin{p}(1)
+Sean $p\neq q$ primos distintos tales que $p-1\mid q-1$. Prueba que
+    \[
+      (n,pq)=1 \ent n^{q-1}\equiv 1\mod pq
+    \]
+\sol Como por hipótesis se tiene que $p-1\mid q-1$, existe una $k$ tal que:
+\begin{equation*}
+  (p-1)k = q-1  \tag{1}
+\end{equation*}
+Como por hipótesis $(n,pq)=1$ y en particular se tiene que $(n,p) = (n,q)=1$, utilizando el
+pequeño teorema de Fermat se obtienen las siguientes congruencias:
+\begin{equation*}
+  n^{q-1} \equiv 1 \mod q \tag{2}
+\end{equation*}
+\begin{equation*}
+  n^{p-1} \equiv 1 \mod p \tag{3}
+\end{equation*}
+Por consiguiente, usando $(1)$ se puede escribir $(2)$ de la siguiente manera, obteniendo 
+así siguientes congruencia:
+\begin{equation*}
+  n^{q-1} = n^{(p-1)k} = (n^{p-1})^k \equiv 1^k \mod p \tag{4}
+\end{equation*}
+Por el teorema chino del residuo, existe una $x$ tal que es solución del sistema de congruencias
+y ésta es a su vez es única.\\
+Considerando el siguiente sistema de congruencias:
+\begin{align*}
+  x \equiv 1 \mod p\\
+  x \equiv 1 \mod q
+\end{align*}
+Ergo, dicho lo anterior, tomando $x=n^{p-1}$ es una solución del sitema, concluyendo que:
+$$n^{q-1} \equiv 1\mod pq$$
+\end{p}
+%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%
+\begin{p}(2)
+Prueba que $a^{\varphi(2^m)/2}\equiv 1\mod 2^m$ para toda $a\in\Z$ y $m>2$. ?`Qu\'e dice este
+resultado sobre la existencia de raices primitivas m\'odulo $2^m$? Calcula las raices primitivas
+m\'odulo $2^m$ para toda $m>0$.\\
+\sol
+
+\end{p}
+%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%
+\begin{p}(5)
+Propiedades de $\ord_m(\clase{a})$.
+\begin{enumerate}
+  \item(1) Prueba que $p>2$ es primo si y solamente si $\ord_p(\clase{a})=p-1$ para alguna $a\in\Z$.\\
+  \sol
+
+  \item(1) Sea $p$ un primo de la forma $4k+3$ y $\clase{a}$ una ra\'iz primitiva. Prueba que
+  $\ord_p(-\clase{a})=\frac{p-1}{2}$.\\
+  \sol
+
+  \item(2) Sean $a,m>1$ tales que $(a,m)=1$ y denota $\varepsilon:=\ord_m(\clase{a})$. Para $k,k'>0$
+  prueba que
+  \[
+    a^k\equiv a^{k'}\mod m \quad\sii\quad k\equiv k'\mod \varepsilon
+  \]
+  \sol
+
+  \item(1) Sean $a,b\in\Z$ y $m>1$ tales que $(a,m)=1=(b,m)$ y
+  $\big(\ord_m(\clase{a}),\ord_m(\clase{b})\big)=1$. Prueba que
+  $\ord_m(\clase{a}\clase{b})=\ord_m(\clase{a})\cdot\ord_m\clase{b}$.\\
+  \sol 
+
+\end{enumerate}
+\end{p}
+%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%
+\begin{p}(1)
+Sea $\clase{a}$ una ra\'iz primitiva m\'odulo $p>2$. Prueba que $\{a^2,a^4,\ldots,a^{p-1}\}$ son
+los residuos cuadr\'aticos m\'odulo $p$ y $\{a,a^3,\ldots,a^{p-2}\}$ son los residuos
+no-cuadr\'aticos.\\
+\sol
+\end{p}
+%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%
+\begin{p}(1)
+Demuestra que hay una infinidad de primos de la forma $6k+1$.\\
+\sol
+
+\end{p}
+%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%
+\begin{p}(3)
+Sea $p>2$ un primo y $U(\Z/p\Z)=\{\clase{1},\clase{2},\ldots,\clase{p-1}\}$. Sean
+$S,T\subseteq U(\Z/p\Z)$ subconjuntos y define
+$S\cdot T:=\{\clase{s}\clase{t}\mid \clase{s}\in S,\clase{t}\in T\}$; tambi\'en define
+$T\cdot T=T^2$ y $S\cdot S=S^2$ de manera an\'aloga (observa que $S\cdot T=T\cdot S$). Si
+$S,T\subseteq U(\Z/p\Z)$ cumplen las siguientes propiedades:
+\begin{itemize}
+  \item $S\neq T$\\
+  \sol
+
+  \item $S\cup T=U(\Z/p\Z)$\\
+  \sol
+  
+  \item $S\cdot T\subseteq T$\\
+  \sol
+  
+  \item $S^2,T^2\subseteq S$ \\
+  \sol
+
+\end{itemize}
+
+Prueba que $S$ es el conjunto de residuos cuadr\'aticos m\'odulo $p$ y $T$ es el conjunto de
+residuos no-cuadr\'aticos m\'odulo $p$.\\
+\sol
+
+\end{p}
+%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%
+\begin{p}(1)
+Sean $a\in\Z$ y $p>2$ primos tales que $p\nmid a$ . Prueba que la ecuaci\'on general
+$ax^2+bx+c\equiv 0\mod p$ tiene $1+\left(\frac{b^2-4ac}{p}\right)$ soluciones.\\
+\sol
+
+\end{p}
+%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%  
+\begin{p}(5)
+Identidades del s\'imbolo de Legendre.
+\begin{enumerate}
+  \item(1) Prueba que para todo primo $p>2$ se cumple:
+  \[
+    \sum_{k=1}^{p-1}\leg{k}{p}=0
+  \]
+  \sol
+
+  \item(2) Toma $a,b\in\Z$ tal que $p\nmid a$. Prueba que
+  \[
+    \sum_{k=1}^{p-1}\leg{ak+b}{p}=0
+  \]
+  \sol
+
+  \item(2) Ahora sea $p$ de la forma $4k+1$, prueba que
+  \[
+    \sum_{k=1}^{p-1}\leg{k}{p}k=0
+  \]
+  \sol
+
+\end{enumerate}
+\end{p}
+%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%
+\begin{p}(18)
+Ejercicios num\'ericos:
+\begin{enumerate}
+  \item(1) Resuelve $256x\equiv 179\mod 337$.\\
+  \sol
+
+  \item(2) Resuelve los siguientes sistemas de congruencias:
+  \begin{align*}
+    x\equiv 3&\mod 8 & y\equiv1\mod7  \\
+    x\equiv 11&\mod 20 & y\equiv4\mod 9 \\
+    x\equiv 1&\mod 15 & y\equiv 3\mod 5
+  \end{align*}
+  \sol
+
+  \item(3) Calcula todas las raices primitivas de $11,13$ y $17$.
+  \sol
+
+  \item(3) Encuentra la soluciones de las siguientes ecuaciones:
+  \[
+    x^8\equiv 17 \mod 43 \quad,\quad 8^x\equiv 3\mod 43 \quad,\quad 1+x+\cdots+x^6\equiv 0\mod 29
+  \]
+  \sol
+
+  \item(2) Usa el lema de Gauss para calcular $\left(\frac{5}{7}\right)$ y $\left(\frac{3}{11}\right)$\\
+  \sol
+  
+  \item(3) Calcula $\left(\frac{61}{233}\right)$ y $\left(\frac{113}{997}\right)$.
+  Adem\'ascalcula $\leg{-1}{m}$ para $m>1$ impar.\\
+  \sol
+
+  \item(2) Encuentra todos los primos tales que $\left(\frac{-3}{p}\right)=1$
+  y $\left(\frac{7}{p}\right)=1$\\
+  \sol
+
+  \item(2) ?`Tiene soluci\'on de ecuaci\'on $x^2+5x\equiv 12\mod 31$? Exhibe las soluciones o prueba
+  que no tiene soluci\'on. Haz lo mismo para la ecuaci\'on $x^2\equiv 19\mod 30$.\\
+  \sol
+
+\end{enumerate}
+
+\end{p}
+%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%
+\begin{p}(11)
+Propiedades de raices primitivas.
+\begin{enumerate}
+  \item(1) Sea $\overline{a}\in\Z/m\Z$ una ra\'iz primitiva m\'odulo $m$. Prueba que $\clase{b}$ es
+  una ra\'iz primitiva si y solamente si $\clase{b}$ es de la forma $\clase{b}=\clase{a}^n$ donde
+  $(n,\varphi(m))=1$ y $1\leq n\leq\varphi(m)$.\\
+  \sol
+
+  \item(1) Sea $\clase{a}\in\Z/m\Z$ con $(a,m)=1$. Prueba $\clase{a}$ es una ra\'iz primitiva
+  m\'odulo $m$ si y solamente si $\clase{a}^{-1}$ es una ra\'iz primitiva.\\
+  \sol
+
+  \item(1) Sea $\clase{a}$ una ra\'iz primitiva m\'odulo $p^{\alpha}$ para alguna $\alpha>0$. Prueba
+  que $\clase{a}$ tambi\'en es ra\'iz primitiva m\'odulo $p$.\\
+  \sol
+
+  \item(1) Sea $p$ un primo de la forma $4k+1$. Prueba que $\clase{a}$ es ra\'iz primitiva m\'odulo $p$
+  si y solamente si $-\clase{a}$ es una ra\'iz primitiva.\\
+  \sol
+
+  \item(3) Para $\clase{a}$ una ra\'iz primitiva m\'odulo un primo $p$, verifica que
+  \[
+    \sum_{\underset{(\varphi(m),k)=1}{k=1}}^{\varphi(m)}a^k \equiv \mu(p-1) \mod p
+  \]
+  \sol
+
+  \item(2) Sea $X$ el conjunto de raices primitivas m\'odulo $p$.
+  \[
+    \prod_{\clase{a}\in X}a\equiv 1\mod p
+  \]
+  \sol
+
+  \item(2) Sea $(a,m)=1$ y $\varphi(m)=p_1^{\alpha_1}\cdots p_s^{\alpha_s}$. Prueba que
+  \[
+    \clase{a}\;\;\text{es ra\'iz primitiva}\quad\sii\quad
+    a^{\frac{\varphi(m)}{p_i}}\not\equiv 1\mod m\quad\forall i\in\{1,\ldots,s\}
+  \]
+  \sol
+\end{enumerate}
+\end{p}
+%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%  
+\begin{p}(6)
+Los primos impares de la forma $4k+1$ son los \'unicos primos impares que son suma de dos cuadrados.
+\begin{enumerate}
+  \item(2) Sea $m$ un entero libre de cuadrados. Demuestra que, si $a\in\Z$ es primo relativo con $m$,
+  entonces existen $x,y\in\Z$ tales que $ax\equiv y\mod m$, $0<x<\sqrt{n}$ y $0<|y|<\sqrt{n}$.\\
+  \sol
+  \item(2) Sea $p>2$ un primo y define $q:=\frac{p-1}{2}$ y $a=q!$. Prueba que $a^2+(-1)^q\equiv 0\mod p$.\\
+  \sol
+
+  \item(1) Ahora restringe al caso $p\equiv 1\mod 4$. Prueba que existen enteros positivos $n$ y $m$
+  donde $0<n,m<\sqrt{p}$ tales que satisfacen la ecuaci\'on $a^2n^2-m^2\equiv 0\mod p$. Concluye
+  que $p=n^2+m^2$.\\
+  \sol
+
+  \item(1) Si $p\equiv 3\mod 4$, prueba que $p$ no puede ser descompuesto en suma de dos cuadrados.\\
+  \sol
+
+\end{enumerate}
+En resumen un primo $p>2$ es suma de dos cuadrados si y solamente si $p\equiv 1\mod 4$.\\
+\sol
+\end{p}
+%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{thebibliography}{}
+
+\bibitem{} 
+Thomas Koshy. 
+\textit{Elementary Number Theory with Applications. 2nd Edition.}
+Addison-Wesley, Reading, Massachusetts, 1993.
+Academic Press. 
+8th May 2007.
+
+\bibitem{}
+Apostol, Tom M. 
+\textit{Introduction to Analytic Number Theory.} 
+Springer-Verlag, New York, 1976.
+
+\bibitem{}
+K. Ireland and M. Rosen.
+\textit{A Classical Introduction to Modern Number Theory (Graduate Texts in Mathematics)}
+Springer, Springer; 2nd edition (August 1, 1998).
+
+\end{thebibliography}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
