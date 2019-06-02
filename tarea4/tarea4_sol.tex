@@ -176,21 +176,7 @@ Tambi\'en prueba que $5n^3+7n^5 \equiv 0\mod 12$.
     \item Por demostrar que $5n^3+7n^5 \equiv 0 \mod{12}$\\
     \sol No supe como hacerlo y opté por hacer un programa en \textit{Python} para ver que
     $5n^3+7n^5 \equiv 0 \mod{12}$.
-    \begin{lstlisting}[language=Python]
-      # Modulo de la congrunencia
-      m = 12
-      # Polinomio que es evaluado en n modulo m
-      f = lambda n, m: pow(5 * n, 3, m) + pow(7 * n, 5, m)
-      # Contador de posibles valores que sera congruente
-      r = 0
-      # Correr la x en [0, m)
-      for x in range(m):
-          # Verificar si es congruente
-          if f(x, m) % m == 0:
-              r += 1
-      # Numero de veces que la x fue congruente
-      print(r)      
-    \end{lstlisting}
+    \lstinputlisting[language=Python]{assets/count_solutions.py}
     Después de ejecutar el programa el, se vio que $r=12$ lo que significa que evaluado la congruencia
     todos los valores que puede tomar hace que la congruencia se satisfaga.
 \end{enumerate}
@@ -202,14 +188,14 @@ Tambi\'en prueba que $5n^3+7n^5 \equiv 0\mod 12$.
 %%%%%%%%%%%%%%%
 \begin{p}(3)
 Prueba que
-    \[
-      (n-1)! \equiv
-      \begin{cases}
-        -1\mod n & n\;\text{es primo} \\
-        0\mod n & n\;\text{es compuesto} \\
-        2\mod n & n=4
-      \end{cases}
-    \]
+\[
+  (n-1)! \equiv
+  \begin{cases}
+    -1\mod n & n\;\text{es primo} \\
+    0\mod n & n\;\text{es compuesto} \\
+    2\mod n & n=4
+  \end{cases}
+\]
 
 \begin{enumerate}
     \item $(n-1)! \equiv -1 \mod{n} \quad n$ es primo\\
@@ -270,9 +256,17 @@ Ecuaciones polinomiales m\'odulo un n\'umero compuesto.
     $m=2^{\alpha}$ para cualquier exponent $\alpha\geq 0$.
     \begin{itemize}
       \item Por demostrar que $N=N_1N_2\cdots N_s$.\\
-      \sol sdfsdf
+      \sol Sea $(b_1, \ldots, b_t)$ una solución al sistema $f(x) \equiv 0 \mod p_i^{\alpha_i}$. Por
+      el teorema chino del residuo, existe un $x$ tal que $x \equiv b_i \mod p_i^{\alpha_i}$.
+      Afirmando que $x$ es solución para $f(x) \equiv 0 \mod n$. En efecto, es lo mismo que decir que
+      que $f(x)$ es divisible por $p_i^{\alpha_i}$ para $i=1,\ldots,t$. Pero dado que 
+      $x \equiv b_i \mod p_i^{\alpha_i}$, y si $f$ es un polinomio, $f(x) \equiv f(b_i) \equiv 0 \mod p_i^{\alpha_i}$,
+      así que $f(x)$ es divisible por $p_i^{\alpha_i}$ para toda $i$.
 
-      \item sdfsd
+      Por tanto, hay una correspondencia biyectiva entre las tuplas $(b_1, \ldots, b_t)$ formando soluciones
+      a $f(x) \equiv 0 \mod p_i^{\alpha_i}$, y siendo $x'$ la solución a $f(x) \equiv 0 \mod n$.
+
+      \item tiene dos sols alv
     \end{itemize}
 
     \item(2) Ahora fija $f(x)=x^2-1$ y definimos $S_m\subseteq\Z/m\Z$ como las soluciones de la
@@ -369,7 +363,21 @@ $$n^{q-1} \equiv 1\mod pq$$
 Prueba que $a^{\varphi(2^m)/2}\equiv 1\mod 2^m$ para toda $a\in\Z$ y $m>2$. ?`Qu\'e dice este
 resultado sobre la existencia de raices primitivas m\'odulo $2^m$? Calcula las raices primitivas
 m\'odulo $2^m$ para toda $m>0$.\\
-\sol
+\sol Por inducción sobre $m$:
+\begin{itemize}
+  \item Caso base ($m = 3$):\\
+  Entonces la congruencua queda como $x^{\varphi(2^m) / 2} \equiv 1 \mod 8$ para un $x$ impar Porque
+  probando los números que son congruentes son $x=1,3,5,7$ y de hecho todas la $x$ son impares.
+  \item Hipótesis de inducción:
+  \[
+    x^{\varphi(2^m) / 2} = 1 + 2^m t \tag{1}
+  \]
+  \item Paso inductivo ($m + 1$):\\
+  Elevando al cuadrado ambos lados de la ecuación $(1)$ se obtiene:
+  $$x^{\varphi(2^m)} = 1 + 2^{m + 1}t + 2^{2m}t^2 \equiv \mod 2^{m + 1}$$
+  Este resultado nos dice que no hay raíces primitiva $\mod 2^m$ y que  las raíces primitivas 
+  módulo $2^m$ son $\varphi(2^{m - 1}) = \varphi(2^{m + 1})/2$.
+\end{itemize}
 
 \end{p}
 %%%%%%%%%%%%%%%
@@ -380,8 +388,11 @@ m\'odulo $2^m$ para toda $m>0$.\\
 Propiedades de $\ord_m(\clase{a})$.
 \begin{enumerate}
   \item(1) Prueba que $p>2$ es primo si y solamente si $\ord_p(\clase{a})=p-1$ para alguna $a\in\Z$.\\
-  \sol
-
+  \sol $\Longrightarrow) $ Por definición de raíz primitiva se tiene que:
+  $$\ord_p(a) = \varphi(p) = p-1$$
+  $\Longleftarrow) $ Como $\ord_p(a) = p-1$ entonces 
+  $p-1 = \ord_p(a) \leq \varphi(p) \leq p-1$, y por la hipótesis eso pasa si $p$ es primo.
+  
   \item(1) Sea $p$ un primo de la forma $4k+3$ y $\clase{a}$ una ra\'iz primitiva. Prueba que
   $\ord_p(-\clase{a})=\frac{p-1}{2}$.\\
   \sol
@@ -396,7 +407,19 @@ Propiedades de $\ord_m(\clase{a})$.
   \item(1) Sean $a,b\in\Z$ y $m>1$ tales que $(a,m)=1=(b,m)$ y
   $\big(\ord_m(\clase{a}),\ord_m(\clase{b})\big)=1$. Prueba que
   $\ord_m(\clase{a}\clase{b})=\ord_m(\clase{a})\cdot\ord_m\clase{b}$.\\
-  \sol 
+  \sol Sea $x = \ord_m(a)$ y $y = \ord_m(b)$, usando la definición de raíz primitiva
+  se sigue la siguiente congruencia:
+  \[
+    (ab)^{xy} \equiv (a^x)^y (a^y)^x \equiv 1 \mod m
+  \]
+  Sea $k = \ord_m(ab)$ y suponiendo que $k \mid xy$, se tiene:
+  \[
+    a^{ky} \equiv (ab)^{ky} \equiv 1 \mod m
+  \]
+  Lo significa que $x \mid ky$, como $(x,y) = 1$ nos lleva a que $x \mid ky$. Como por 
+  hipótesis $(a,m)=1=(b,m)$ entonces se tiene que
+  $x \mid k$ y $y \mid k$, se sigue que $xy \mid k$. Ergo $k = xy$, lo que significa que
+  $\ord_m(\clase{a}\clase{b})=\ord_m(\clase{a})\cdot\ord_m\clase{b}$.
 
 \end{enumerate}
 \end{p}
@@ -408,7 +431,14 @@ Propiedades de $\ord_m(\clase{a})$.
 Sea $\clase{a}$ una ra\'iz primitiva m\'odulo $p>2$. Prueba que $\{a^2,a^4,\ldots,a^{p-1}\}$ son
 los residuos cuadr\'aticos m\'odulo $p$ y $\{a,a^3,\ldots,a^{p-2}\}$ son los residuos
 no-cuadr\'aticos.\\
-\sol
+\sol Si $n$ es par, digamos $n = 2m$ entonces $a^n = (a^m)^2$ así que
+\[
+  a^n \equiv x^2 \mod p \qquad \text{Donde } x=a^m  
+\]
+Por consiguiente $a^nRp$. Pero hay $\frac{p-1}{2}$ distintas potencias pares
+$a^2, \ldots, a^{p-1}$ módulo $p$ y el mismo números de residuos cuadráticos módulo $p$. Por tanto
+las potencias pares son los residuos cuadráticos y las potencias impares son los residuos
+no-cuadráticos.
 \end{p}
 %%%%%%%%%%%%%%%
 
@@ -416,8 +446,25 @@ no-cuadr\'aticos.\\
 %%%%%%%%%%%%%%%
 \begin{p}(1)
 Demuestra que hay una infinidad de primos de la forma $6k+1$.\\
-\sol
+\sol Sea $P$ el conjunto finito de número primos de la forma $6k+1$, y sea $N$ un número que es 
+divisible por cada número en P. Suponiendo que $N$ es también por 6. Sea $p$ un primo divisor de 
+$N^2 - N + 1$.
 
+Teniendo en cuenta que $(N^2 - N + 1)(N+1) = N^3 +1$, así $p$ divide a $N^3 +1$, o en otras palabras
+$N^3 \equiv -1 \mod p$ y así $N^6 \equiv 1 \mod p$.
+
+Recordando que el orden de $N$ módulo $p$ es el menor entero positivo $k$ tal que $N^k \equiv 1 \mod p$.
+El orden debe dividir a 6, tal que $k = 1,2,3$ ó 6. Pero $N^3 \equiv -1 \mod p$, por lo que el 
+orden no puede ser 1 ó 3.
+
+El orden no puede ser 2 porque si $N^2 \equiv 1 \mod p$ y $N^3 \equiv -1 \mod p$ entonces 
+$N \equiv -1 \mod p$. Lo que no se podría porque entonces $p$ dividiría a ambos $N+1$ y
+$N^2 - N+1$, pero el $(N+1. N^2 - N +1) = (N+1, 3) < p$ lo cual es una contradicción.
+
+Por consiguiente, $N$ tiene orden 6 módulo $p$ y el grupo de las unidades módulo $p$ tiene orden $p-1$,
+de esta manera 6 divide a $p-1$, lo que significa que $p$ es de la forma $6k+1$. Por tanto,
+$P$ no contiene a todos los primos de la forma $6k+1$, concluyendo que el conjuto de primo de esa
+forma es infinito.
 \end{p}
 %%%%%%%%%%%%%%%
 
@@ -456,7 +503,7 @@ residuos no-cuadr\'aticos m\'odulo $p$.\\
 \begin{p}(1)
 Sean $a\in\Z$ y $p>2$ primos tales que $p\nmid a$ . Prueba que la ecuaci\'on general
 $ax^2+bx+c\equiv 0\mod p$ tiene $1+\left(\frac{b^2-4ac}{p}\right)$ soluciones.\\
-\sol
+\sol 
 
 \end{p}
 %%%%%%%%%%%%%%%
@@ -470,13 +517,17 @@ Identidades del s\'imbolo de Legendre.
   \[
     \sum_{k=1}^{p-1}\leg{k}{p}=0
   \]
-  \sol
+  \sol Como hay exactamente tantos residuos cuadráticos como no residuo cuadráticos y para
+  los residuos $\leg{k}{p}=0$ y para los no residuos es igual a -1, entonces la suma da 0.
 
   \item(2) Toma $a,b\in\Z$ tal que $p\nmid a$. Prueba que
   \[
     \sum_{k=1}^{p-1}\leg{ak+b}{p}=0
   \]
-  \sol
+  \sol Como $p\nmid a$ entonces $\{ a \cdot 1, a \cdot 2, \ldots, a \cdot (p-1) \}$ es el juego
+  completo de residuos módulo $p$ y por lo tanto también es
+  $\{ a \cdot 1 + b, a \cdot 2+b, \ldots, a \cdot (p-1)+b \}$ y utilizando el ejercicio anterior
+  se sigue que la suma da 0.
 
   \item(2) Ahora sea $p$ de la forma $4k+1$, prueba que
   \[
@@ -494,18 +545,44 @@ Identidades del s\'imbolo de Legendre.
 Ejercicios num\'ericos:
 \begin{enumerate}
   \item(1) Resuelve $256x\equiv 179\mod 337$.\\
-  \sol
+  \sol Verificando primero que $(256, 337)=1$ y como $1 \mid 179$ entonces sí tiene solución y tiene
+  1 solución incongruente. Las soluciones están dadas por 
+  $x = x_0 + (\frac{m}{d})t = x_0 + (\frac{337}{1})t = x_0 + 337t$, donde $x_0$ es una solución
+  particular. Ahora por \textit{prueba y error} se tiene que $x_0 = 81$ es una solución.\\
+  Ergo la solución general es de la forma $x = 81 + 337t$.
 
   \item(2) Resuelve los siguientes sistemas de congruencias:
   \begin{align*}
-    x\equiv 3&\mod 8 & y\equiv1\mod7  \\
-    x\equiv 11&\mod 20 & y\equiv4\mod 9 \\
-    x\equiv 1&\mod 15 & y\equiv 3\mod 5
+    x\equiv 3&\mod 8\\
+    x\equiv 11&\mod 20\\
+    x\equiv 1&\mod 15
   \end{align*}
-  \sol
+  \sol Como soy pésimo haciendo cuentas y sé programar, use un programa en 
+  \textbf{Python}\footnote{Para usarlo con la terminal poner \texttt{\$ python3 chinese\_remainder\_theorem.py}} que
+  por medio del Teorema Chino del residuo primero dice si tiene solución el sistema y si existe, calcula $x$.
+  \lstinputlisting[language=Python]{assets/chinese_remainder_theorem.py}
 
-  \item(3) Calcula todas las raices primitivas de $11,13$ y $17$.
-  \sol
+  En este caso la congruencia tiene solución y es $x=20$.
+
+  \begin{align*}
+    y\equiv1\mod7\\
+    y\equiv4\mod 9\\
+    y\equiv 3\mod 5
+  \end{align*}
+  \sol Usando el programa de arriba se tiene que que la solución es $x=5$.
+
+  \item(3) Calcula todas las raices primitivas de $11,13$ y $17$.\\
+  Igual como soy malo haciendo cuentas y esas cosas, use \textit{Python} para 
+  calcularlas\footnote{Teniendo instalado \texttt{sympy==1.3} en Python 3.7, abrir el interprete
+  y primero importar \texttt{sympy} para poder usarlo (con \texttt{import sympy}) y despues la
+  siguiente función \texttt{list(sympy.ntheory.residue\_ntheory.\_primitive\_root\_prime\_iter(n))}
+  donde en la \texttt{n} ponemos el número y nos regresará una lista con las raíces primitivas
+  del número dado.}.
+  \begin{itemize}
+    \item Las raíces primitivas de 11 son: $\{ 2,6,7,8\}$.
+    \item Las raíces primitivas de 13 son: $\{ 2,6,7,11\}$.
+    \item Las raíces primitivas de 17 son: $\{ 3,5,6,7,10,11,12,14\}$.
+  \end{itemize}
 
   \item(3) Encuentra la soluciones de las siguientes ecuaciones:
   \[
@@ -515,10 +592,41 @@ Ejercicios num\'ericos:
 
   \item(2) Usa el lema de Gauss para calcular $\left(\frac{5}{7}\right)$ y $\left(\frac{3}{11}\right)$\\
   \sol
+  \begin{itemize}
+    \item $\left(\frac{5}{7}\right)$ : $\frac{7-1}{2} = 3$, y así los residuos de
+    $1 \cdot 5, 2 \cdot 5, 3 \cdot 5$ son $-2,3,1$ respectivamente, así $\mu = 1$ y 
+    $\left(\frac{5}{7}\right) = \left( -1 \right)^{\mu} = -1$.
+
+    \item $\left(\frac{3}{11}\right)$ : $\frac{11-1}{2} = 5$, y así los residuos de
+    $1 \cdot 3, 2 \cdot 3, 3 \cdot 3, 3 \cdot 4, 4 \cdot 3, 5 \cdot 3$ son $3,-1,-2,1,4$
+    respectivamente, así $\mu = 2$ y $\left(\frac{3}{13}\right) = \left( -1 \right)^{\mu} = 1$.
+  \end{itemize}
   
   \item(3) Calcula $\left(\frac{61}{233}\right)$ y $\left(\frac{113}{997}\right)$.
-  Adem\'ascalcula $\leg{-1}{m}$ para $m>1$ impar.\\
-  \sol
+  Adem\'as calcula $\leg{-1}{m}$ para $m>1$ impar.
+  \begin{itemize}
+    \item $\left(\frac{113}{997}\right)$.\\
+    \sol Usando el símbolo de Jacobbi se tiene:
+    $$\left(\frac{113}{997}\right) \left(\frac{997}{113}\right) = 
+    (-1)^{\frac{113-1}{2} \frac{997-1}{2}} = (-1)^{56 \cdot 498} = 1$$
+
+    Así, $\left(\frac{113}{997}\right) = \left(\frac{997}{113}\right) = \left(\frac{93}{113}\right)$.
+    Aplicando reciprocidad cuadrática de nuevo se tiene
+    $$\left(\frac{93}{113}\right) \left(\frac{113}{93}\right) = 
+    (-1)^{\frac{93-1}{2} \frac{113-1}{2}} = (-1)^{46 \cdot 56} = 1$$
+
+    Así, $\left(\frac{93}{113}\right) = \left(\frac{113}{93}\right) = \left(\frac{20}{93}\right) 
+    = \left(\frac{4}{93}\right) \cdot \left(\frac{5}{93}\right)$,
+    como 4 siempre es residuo cuadrático, se tiene:
+    $$\left(\frac{5}{93}\right) \left(\frac{93}{5}\right) = 
+    (-1)^{\frac{93-1}{2} \frac{5-1}{2}} = (-1)^{46 \cdot 2} = 1$$
+    Y entonces $\left(\frac{5}{93}\right) = \left(\frac{93}{5}\right) = \left(\frac{3}{5}\right) =
+    -1$ y como 1, 4 son los únicos residuos cuadráticos módulo 5.
+
+    \item $\leg{-1}{m}$ para $m>1$ impar.\\
+    \sol $\leg{-1}{m}:$ son los residuos del los primeros $\frac{m-1}{2}$ mútiplos de -1 todos
+    negativos, así $\leg{-1}{m} = (-1)^{\mu} = (-1)^{(p-1)/2}$.
+  \end{itemize}
 
   \item(2) Encuentra todos los primos tales que $\left(\frac{-3}{p}\right)=1$
   y $\left(\frac{7}{p}\right)=1$\\
@@ -536,7 +644,8 @@ Ejercicios num\'ericos:
 
 %%%%%%%%%%%%%%%
 \begin{p}(11)
-Propiedades de raices primitivas.
+Propiedades de raices primitivas.\\
+\textbf{Quiero tomar este ejercicio gratis }
 \begin{enumerate}
   \item(1) Sea $\overline{a}\in\Z/m\Z$ una ra\'iz primitiva m\'odulo $m$. Prueba que $\clase{b}$ es
   una ra\'iz primitiva si y solamente si $\clase{b}$ es de la forma $\clase{b}=\clase{a}^n$ donde
@@ -574,7 +683,8 @@ Propiedades de raices primitivas.
   \]
   \sol
 \end{enumerate}
-\end{p}
+\end{p} 
+\pagebreak
 %%%%%%%%%%%%%%%
 
 
